@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXDatePicker?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import de.jensd.fx.glyphs.emojione.EmojiOneView?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" stylesheets="@../../theme.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Accounts.Expenses.ExpensesDetailsController">
+    <children>
+        <Pane fx:id="expensesDetailsPane" prefHeight="1275.0" prefWidth="1473.0">
+            <children>
+                <Label layoutX="169.0" layoutY="4.0" prefHeight="98.0" prefWidth="511.0" text="Expenses Details">
+                    <font>
+                        <Font name="Californian FB Bold" size="36.0" />
+                    </font>
+                </Label>
+                <ScrollPane layoutX="199.0" layoutY="518.0" prefHeight="350.0" prefWidth="1174.0">
+                    <content>
+                        <TableView fx:id="expensesTable" prefHeight="350.0" prefWidth="1156.0">
+                            <columns>
+                                <TableColumn fx:id="colExpID" editable="false" maxWidth="300.0" minWidth="169.0" prefWidth="169.0" text="Expense ID" />
+                                <TableColumn fx:id="colExpType" editable="false" maxWidth="300.0" minWidth="-Infinity" prefWidth="246.0" text="Expense Type" />
+                                <TableColumn fx:id="colExpName" editable="false" minWidth="179.0" prefWidth="179.0" text="Expense Title" />
+                                <TableColumn fx:id="colExpDescription" editable="false" maxWidth="337.0" minWidth="-Infinity" prefWidth="244.0" text="Description" />
+                                <TableColumn fx:id="colExpAmount" editable="false" maxWidth="429.0" minWidth="0.0" prefWidth="172.0" text="Amount (Bdt)" />
+                        <TableColumn fx:id="colExpDate" editable="false" maxWidth="429.0" minWidth="0.0" prefWidth="143.0" text="Date" />
+                            </columns>
+                        </TableView>
+                    </content></ScrollPane>
+                <JFXTextField fx:id="searchExpTextField" focusColor="#900f0f" labelFloat="true" layoutX="242.0" layoutY="460.0" prefHeight="31.0" prefWidth="265.0" promptText="Search" styleClass="search-field">
+                    <font>
+                        <Font size="18.0" />
+                    </font>
+                </JFXTextField>
+                <AnchorPane layoutX="346.0" layoutY="91.0" prefHeight="350.0" prefWidth="712.0" style="-fx-background-color: #212121;">
+                    <children>
+                        <JFXTextField fx:id="expNameTextField" layoutX="112.0" layoutY="109.0" prefHeight="39.0" prefWidth="245.0" promptText="Title" />
+                        <JFXTextField fx:id="expAmountTextField" layoutX="438.0" layoutY="109.0" prefHeight="39.0" prefWidth="245.0" promptText="Amount (Bdt)" />
+                        <FontAwesomeIconView glyphName="SELLSY" layoutX="59.0" layoutY="136.0" size="20" text="" />
+                        <JFXButton fx:id="expConfirmBtn" graphicTextGap="22.0" layoutX="315.0" layoutY="298.0" onAction="#expConfirmBtn" onMouseClicked="#expConfirmBtn" prefHeight="31.0" prefWidth="82.0" styleClass="password-change" text="Add" />
+                        <JFXComboBox fx:id="expTypeComboBox" editable="true" labelFloat="true" layoutX="234.0" layoutY="35.0" onAction="#handleType" prefHeight="39.0" prefWidth="245.0" promptText="Type" unFocusColor="#eb8d8d" />
+                        <FontAwesomeIconView glyphName="MONEY" layoutX="391.0" layoutY="135.0" size="20" />
+                        <EmojiOneView glyphName="REGIONAL_INDICATOR_T" layoutX="181.0" layoutY="61.0" size="21" />
+                  <JFXTextField fx:id="expDescriptionTextField1" layoutX="112.0" layoutY="199.0" prefHeight="39.0" prefWidth="245.0" promptText="Description" />
+                  <FontAwesomeIconView glyphName="STICKY_NOTE" layoutX="61.0" layoutY="226.0" size="20" />
+                  <FontAwesomeIconView glyphName="CALENDAR" layoutX="393.0" layoutY="225.0" size="20" />
+                  <JFXDatePicker fx:id="expDate" defaultColor="#eb8d8d" layoutX="438.0" layoutY="202.0" promptText="Date" stylesheets="@../../theme.css" />
+                    </children>
+               <effect>
+                  <DropShadow color="#f88989" offsetY="3.0" radius="22.5" spread="0.17" width="71.0" />
+               </effect>
+                </AnchorPane>
+            <FontAwesomeIconView fx:id="backButton" glyphName="ARROW_LEFT" layoutX="108.0" layoutY="64.0" onMouseClicked="#handleBackButton" size="32.0" styleClass="glyph-icon-back" />
+            </children>
+        </Pane>
+    </children>
+
+</AnchorPane>

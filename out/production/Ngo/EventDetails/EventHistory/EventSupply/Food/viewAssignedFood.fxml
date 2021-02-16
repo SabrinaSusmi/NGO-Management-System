@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="viewDetails" prefHeight="543.0" prefWidth="718.0" stylesheets="@../../../../theme.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="EventDetails.EventHistory.EventSupply.Food.ViewAssignedFoodController">
+    <children>
+        <TableView fx:id="informationTable" layoutY="56.0" prefHeight="431.0" prefWidth="759.0">
+            <columns>
+                <TableColumn fx:id="colName" prefWidth="185.0" text="NAME" />
+                <TableColumn fx:id="colQuantity" prefWidth="185.0" text="QUANTITY" />
+                <TableColumn fx:id="colPrice" prefWidth="188.0" text="PRICE (Bdt)" />
+                <TableColumn fx:id="colSupplier" prefWidth="198.0" text="SUPPLIER" />
+            </columns>
+        </TableView>
+        <Button graphicTextGap="22.0" layoutX="686.0" layoutY="498.0" mnemonicParsing="false" onAction="#handleBackButton" style="-fx-background-color: FDAB9F;" text="BACK">
+            <font>
+                <Font name="Californian FB" size="18.0" />
+            </font>
+         <effect>
+            <DropShadow />
+         </effect>
+        </Button>
+    </children>
+
+</AnchorPane>

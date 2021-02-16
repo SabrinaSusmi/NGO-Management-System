@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXDatePicker?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.effect.InnerShadow?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="addDoctorPane" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1350.0" stylesheets="@../../../theme.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Person.DoctorDetails.AddDoctor.AddDoctorController">
+    <children>
+        <AnchorPane layoutX="375.0" layoutY="122.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="755.0" prefWidth="690.0" style="-fx-background-color: #212121;">
+            <children>
+                <Button fx:id="confirmUpdateBtn" graphicTextGap="22.0" layoutX="192.0" layoutY="681.0" mnemonicParsing="false" onMouseClicked="#handleConfirmButton" opacity="0.82" prefHeight="42.0" prefWidth="135.0" style="-fx-background-color: FDAB9F;" text="Confirm">
+                    <font>
+                        <Font name="Californian FB" size="18.0" />
+                    </font>
+               <effect>
+                  <InnerShadow />
+               </effect>
+                </Button>
+                <Button fx:id="backButton" graphicTextGap="22.0" layoutX="445.0" layoutY="681.0" mnemonicParsing="false" onAction="#handleBackButton" opacity="0.82" prefHeight="42.0" prefWidth="135.0" style="-fx-background-color: FDAB9F;" text="Back">
+                    <font>
+                        <Font name="Californian FB" size="18.0" />
+                    </font>
+               <effect>
+                  <InnerShadow />
+               </effect>
+                </Button>
+            <JFXTextField fx:id="DoctorName" labelFloat="true" layoutX="178.0" layoutY="53.0" prefHeight="44.0" prefWidth="434.0" promptText="Name" />
+            <JFXComboBox fx:id="DoctorSpeciality" editable="true" labelFloat="true" layoutX="178.0" layoutY="126.0" prefHeight="31.0" prefWidth="434.0" promptText="Speciality" styleClass="input" />
+            <JFXTextField fx:id="DoctorEmailID" labelFloat="true" layoutX="178.0" layoutY="191.0" prefHeight="44.0" prefWidth="434.0" promptText="Email ID" />
+            <JFXTextField fx:id="DoctorPhoneNumber" labelFloat="true" layoutX="178.0" layoutY="266.0" prefHeight="44.0" prefWidth="434.0" promptText="Contact No." />
+            <JFXComboBox fx:id="DoctorGender" editable="true" labelFloat="true" layoutX="178.0" layoutY="339.0" prefHeight="31.0" prefWidth="434.0" promptText="Gender" styleClass="input" />
+            <JFXDatePicker fx:id="DoctorDOB" defaultColor="#f3e4e4" layoutX="178.0" layoutY="403.0" prefHeight="39.0" prefWidth="434.0" promptText="Date of Birth" styleClass="date" />
+            <JFXTextField fx:id="DoctorAddress" labelFloat="true" layoutX="178.0" layoutY="612.0" prefHeight="44.0" prefWidth="434.0" promptText="Address" />
+            <JFXTextField fx:id="DoctorAvailableTime" labelFloat="true" layoutX="178.0" layoutY="541.0" prefHeight="44.0" prefWidth="434.0" promptText="Available Time" />
+            <JFXTextField fx:id="DoctorQualification" labelFloat="true" layoutX="179.0" layoutY="470.0" prefHeight="44.0" prefWidth="434.0" promptText="Qualification" />
+            <FontAwesomeIconView glyphName="USER_CIRCLE_ALT" layoutX="130.0" layoutY="86.0" size="25" />
+            <FontAwesomeIconView glyphName="MORTAR_BOARD" layoutX="131.0" layoutY="500.0" size="25" />
+            <FontAwesomeIconView glyphName="HOURGLASS_2" layoutX="130.0" layoutY="571.0" size="25" />
+            <FontAwesomeIconView glyphName="ADDRESS_BOOK_ALT" layoutX="131.0" layoutY="642.0" size="25" />
+            <FontAwesomeIconView glyphName="PHONE" layoutX="131.0" layoutY="296.0" size="25" />
+            <FontAwesomeIconView glyphName="TRANSGENDER" layoutX="130.0" layoutY="367.0" size="25" />
+            <FontAwesomeIconView glyphName="CALENDAR" layoutX="131.0" layoutY="431.0" size="25" />
+            <FontAwesomeIconView glyphName="USER_MD" layoutX="130.0" layoutY="154.0" size="25" />
+            <FontAwesomeIconView glyphName="ENVELOPE" layoutX="130.0" layoutY="221.0" size="25" />
+            </children>
+         <effect>
+            <DropShadow color="#f88989" offsetY="3.0" radius="22.63" spread="0.17" width="71.52" />
+         </effect>
+        </AnchorPane>
+        <Label layoutX="375.0" layoutY="74.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="42.0" prefWidth="410.0" text="Add A Doctor ">
+            <font>
+                <Font name="Californian FB Bold" size="36.0" />
+            </font>
+        </Label>
+    </children>
+
+</AnchorPane>

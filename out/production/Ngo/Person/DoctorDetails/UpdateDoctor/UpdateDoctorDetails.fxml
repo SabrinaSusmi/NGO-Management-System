@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXTextField?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.effect.InnerShadow?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="updateDoctorPane" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1350.0" stylesheets="@../../../theme.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Person.DoctorDetails.UpdateDoctor.UpdateDoctorDetailsController">
+    <children>
+        <AnchorPane layoutX="375.0" layoutY="160.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="690.0" style="-fx-background-color: #212121;">
+            <children>
+                <Button fx:id="confirmUpdateBtn" graphicTextGap="22.0" layoutX="171.0" layoutY="587.0" mnemonicParsing="false" onMouseClicked="#handleConfirmButton" opacity="0.82" prefHeight="42.0" prefWidth="135.0" style="-fx-background-color: FDAB9F;" text="Confirm">
+                    <font>
+                        <Font name="Californian FB" size="18.0" />
+                    </font>
+               <effect>
+                  <InnerShadow />
+               </effect>
+                </Button>
+                <Button fx:id="backButton" graphicTextGap="22.0" layoutX="424.0" layoutY="587.0" mnemonicParsing="false" onAction="#handleBackButton" opacity="0.82" prefHeight="42.0" prefWidth="135.0" style="-fx-background-color: FDAB9F;" text="Back">
+                    <font>
+                        <Font name="Californian FB" size="18.0" />
+                    </font>
+               <effect>
+                  <InnerShadow />
+               </effect>
+                </Button>
+            <JFXTextField fx:id="DoctorID" labelFloat="true" layoutX="152.0" layoutY="83.0" onAction="#IDOnEnter" prefHeight="39.0" prefWidth="434.0" promptText="Doctor ID" />
+            <JFXTextField fx:id="DoctorName" labelFloat="true" layoutX="152.0" layoutY="152.0" prefHeight="39.0" prefWidth="434.0" promptText="Doctor Name" />
+            <JFXTextField fx:id="DoctorEmailID" labelFloat="true" layoutX="152.0" layoutY="215.0" prefHeight="39.0" prefWidth="434.0" promptText="Doctor Email" />
+            <JFXTextField fx:id="DoctorPhoneNumber" labelFloat="true" layoutX="152.0" layoutY="278.0" prefHeight="39.0" prefWidth="434.0" promptText="Phone no" />
+            <JFXTextField fx:id="DoctorAvailableTime" labelFloat="true" layoutX="152.0" layoutY="346.0" prefHeight="39.0" prefWidth="434.0" promptText="Available Time" />
+            <JFXTextField fx:id="DoctorQualification" labelFloat="true" layoutX="153.0" layoutY="415.0" prefHeight="39.0" prefWidth="434.0" promptText="Qualification" />
+            <JFXTextField fx:id="DoctorAddress" labelFloat="true" layoutX="154.0" layoutY="486.0" prefHeight="39.0" prefWidth="434.0" promptText="Address" />
+            <FontAwesomeIconView glyphName="PENCIL" layoutX="108.0" layoutY="112.0" size="25" />
+            <FontAwesomeIconView glyphName="PHONE" layoutX="108.0" layoutY="306.0" size="25" />
+            <FontAwesomeIconView glyphName="HOURGLASS_2" layoutX="108.0" layoutY="374.0" size="25" />
+            <FontAwesomeIconView glyphName="MORTAR_BOARD" layoutX="108.0" layoutY="443.0" size="25" />
+            <FontAwesomeIconView glyphName="ADDRESS_BOOK" layoutX="108.0" layoutY="514.0" size="25" />
+            <FontAwesomeIconView glyphName="USER" layoutX="108.0" layoutY="180.0" size="25" />
+            <FontAwesomeIconView glyphName="ENVELOPE" layoutX="106.0" layoutY="243.0" size="25" />
+            </children>
+         <effect>
+            <DropShadow color="#e48080" offsetY="3.0" radius="22.5" spread="0.17" width="71.0" />
+         </effect>
+        </AnchorPane>
+        <Label layoutX="375.0" layoutY="98.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="42.0" prefWidth="410.0" text="Update Doctor Details">
+            <font>
+                <Font name="Californian FB Bold" size="36.0" />
+            </font>
+        </Label>
+    </children>
+
+</AnchorPane>

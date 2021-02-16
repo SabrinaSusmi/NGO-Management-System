@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.Reflection?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<Pane fx:id="salaryBarchart" prefHeight="554.0" prefWidth="1328.0" style="-fx-background-color: #ffe4e1;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Accounts.Summary.SalaryBarchart.SalaryChartController">
+   <children>
+       <BarChart fx:id="SalaryChart" categoryGap="14.0" layoutX="230.0" layoutY="18.0" prefHeight="497.0" prefWidth="912.0" stylesheets="@../../../theme.css" title="Salary Expense">
+        <xAxis>
+          <CategoryAxis label="Designation Name" side="BOTTOM" fx:id="x" />
+        </xAxis>
+        <yAxis>
+          <NumberAxis fx:id="y" label="Total Salary given" side="LEFT" />
+        </yAxis>
+      </BarChart>
+       <JFXTextField fx:id="totalSalaryTextfield" editable="false" layoutX="1039.0" layoutY="498.0" prefHeight="39.0" prefWidth="183.0" style="-fx-background-color: #ffffff;" styleClass="summary-text-field" stylesheets="@../../../theme.css">
+         <effect>
+            <Reflection fraction="0.3" />
+         </effect></JFXTextField>
+       <Label graphicTextGap="22.0" layoutX="868.0" layoutY="503.0" prefHeight="23.0" prefWidth="173.0" text="Total Salary (Bdt) :">
+           <font>
+               <Font name="Californian FB Bold" size="20.0" />
+           </font>
+       </Label>
+   </children>
+</Pane>

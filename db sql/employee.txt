@@ -1,0 +1,82 @@
+-------------employee
+drop table employee;
+create TABLE EMPLOYEE(
+emp_id number ,
+name varchar2(100) not null,
+password  varchar2(200) not null,
+email varchar2(50) not null,
+dob date ,
+gender varchar2(10) ,
+address varchar2(200) ,
+phone varchar2(20),
+DESIGNATION varchar2(50) ,
+constraint emp_desig foreign key(DESIGNATION) references designation(id),
+constraint emp_gender check (gender in ('Male','Female','Others')),
+CONSTRAINT EMP_ID_PK PRIMARY KEY(EMP_ID),
+CONSTRAINT email_unique_employee UNIQUE (email),
+CONSTRAINT phone_unique_employee UNIQUE (phone)
+);
+
+
+------------------------------------------- generate emp_id
+set serveroutput on;
+CREATE OR REPLACE FUNCTION GET_Employee_ID(emp_name varchar2,email_p varchar2)
+RETURN number
+IS
+V_ID number;
+yr number;
+mn number;
+dd varchar2(10);
+BEGIN
+SELECT  max(emp_ID) INTO V_ID
+FROM employee;
+
+select substr(to_char(sysdate,'YYYYMMDD'),3,4) into dd from dual;
+
+IF V_ID IS NULL --- Does not exist
+THEN
+	V_ID := to_number(dd || '1001');
+	
+ELSE
+	select max(substr(emp_id,-4)) into mn from employee ;
+
+	mn:=mn+1;
+	v_id := to_number(dd||mn);
+	
+END IF;
+
+RETURN NVL(V_ID,-1); --- -1 IS THE ERROR FLAG
+
+END GET_Employee_ID;
+/
+
+
+-------------------------- Calling this from a trigger
+
+CREATE OR REPLACE TRIGGER TRG_GEN_emp_ID
+BEFORE INSERT ON employee
+FOR EACH ROW
+BEGIN
+
+:NEW.emp_ID := GET_Employee_ID(:NEW.name,:NEW.email);
+
+END;
+/
+
+
+------------------------count the total number of employee
+create or replace function num_of_employee(desig varchar2,fid varchar2)
+return number
+is 
+types varchar2(10);
+total number;
+begin
+select lpad(fid,'1') into types from dual;
+if types='E' then
+select count(designation)into total from designation d,employee where d.id=designation and designation_name=desig;
+elsif types='D' then
+select count(speciality)into total from designation d,doctor where d.id=speciality and designation_name=desig;
+end if;
+return total;
+end;
+/

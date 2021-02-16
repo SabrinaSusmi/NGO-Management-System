@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: #ffe4e1;" styleClass="supply-button" stylesheets="@../theme.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="EventDetails.EventsEmployeeController">
+    <children>
+        <Pane fx:id="eventDetailsPane" prefHeight="1275.0" prefWidth="1600.0" style="-fx-background-color: #ffe4e1;" stylesheets="@../theme.css">
+            <children>
+                  <TableView fx:id="eventTable" layoutX="142.0" layoutY="138.0" prefHeight="623.0" prefWidth="1000.0" style="-fx-prompt-text-fill: #8B0000; -fx-text-fill: BLACK; -jfx-focus-color: #8B0000; -fx-background-color: #F7E9E9; -fx-cell-size: 45px;" stylesheets="@../theme.css">
+                      <columns>
+                          <TableColumn fx:id="colEventID" editable="false" maxWidth="300.0" minWidth="225.99996948242188" prefWidth="334.0" text="Event ID" />
+                          <TableColumn fx:id="colEventName" editable="false" minWidth="240.0" prefWidth="392.0" text="Event Name" />
+                          <TableColumn fx:id="colEventDate" editable="false" maxWidth="367.0" minWidth="-Infinity" prefWidth="308.0" text="Event Date" />
+                      </columns>
+               <styleClass>
+                  <String fx:value="search-field" />
+                  <String fx:value="table-row-cell" />
+                  <String fx:value="table-view" />
+               </styleClass>
+                  </TableView>
+                <AnchorPane layoutX="-1.0" layoutY="-1.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="64.0" prefWidth="1800.0" style="-fx-background-color: #212121;">
+                    <children>
+                        <Label layoutX="62.0" layoutY="22.0" prefHeight="67.0" prefWidth="290.0" text="Events" textFill="WHITE">
+                            <font>
+                                <Font name="Californian FB Bold" size="36.0" />
+                            </font>
+                        </Label>
+                    </children>
+                </AnchorPane>
+            </children>
+        </Pane>
+    </children>
+</AnchorPane>

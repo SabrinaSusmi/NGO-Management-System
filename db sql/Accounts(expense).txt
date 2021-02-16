@@ -1,0 +1,54 @@
+------------------------------(Accounts)Expenses table
+drop table expenses;
+create table expenses(
+expenses_id varchar2(250) primary key,
+type varchar2(200) not null,
+title varchar2(100) not null,
+description varchar2(200),
+amount number not null,
+expense_date date not null,
+constraint type check (type in ('Utility','Salary','Others'))
+);
+
+------------------------------generate expense id
+CREATE OR REPLACE FUNCTION GET_Expense_id(f_type varchar2)
+RETURN varchar2
+IS
+d_ID varchar2(15);
+id varchar2(15);
+vv number;
+types varchar2(50);
+
+BEGIN
+SELECT  max(expenses_id) INTO d_ID FROM expenses;
+if f_type='Utility' then types:='UTIL';
+elsif f_type='Salary' then types:='SAL';
+else types:='OTRS';
+end if;
+
+IF d_ID IS NULL --- Does not exist
+THEN
+    id :=  types || '80001' ;
+
+ELSE
+select max(substr(expenses_id,-5)) into vv from expenses ;
+    vv := vv + 1;
+	id :=  types || to_char(vv);
+
+END IF;
+
+RETURN NVL( (id) , -1); --- -1 IS THE ERROR FLAG
+
+END;
+/
+--- Calling this from a trigger
+
+CREATE OR REPLACE TRIGGER TRG_GEN_EXPENSE_ID
+BEFORE INSERT ON expenses
+FOR EACH ROW
+BEGIN
+
+:NEW.expenses_id := GET_Expense_id(:new.type);
+
+END;
+/

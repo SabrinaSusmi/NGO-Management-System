@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXTextField?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import java.lang.String?>
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.Reflection?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+<Pane fx:id="expensesBarchart" prefHeight="554.0" prefWidth="1328.0" style="-fx-background-color: #ffe4e1;" stylesheets="@../../../theme.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Accounts.Summary.ExpenseBarChart.ExpensesChartController">
+    <children>
+        <Label layoutX="538.0" layoutY="19.0" text="For Month" />
+        <Label layoutX="657.0" layoutY="19.0" text="and Year" />
+        <FontAwesomeIconView glyphName="SEARCH" layoutX="504.0" layoutY="35.0" />
+        <Line endX="227.0" layoutX="600.0" layoutY="45.0" startX="-100.0" />
+        <TextField fx:id="monthNumber" alignment="CENTER" layoutX="613.0" layoutY="14.0" prefHeight="31.0" prefWidth="39.0" stylesheets="@../../../theme.css">
+         <styleClass>
+            <String fx:value="summary-text-field" />
+            <String fx:value="second-text-field" />
+         </styleClass></TextField>
+        <TextField fx:id="yearNumber" alignment="CENTER" layoutX="722.0" layoutY="14.0" onAction="#monthOnEnter" prefHeight="31.0" prefWidth="90.0" stylesheets="@../../../theme.css">
+         <styleClass>
+            <String fx:value="summary-text-field" />
+            <String fx:value="second-text-field" />
+         </styleClass></TextField>
+
+        <BarChart fx:id="ExpensesChart" categoryGap="15.0" layoutX="5.0" layoutY="56.0" prefHeight="443.0" prefWidth="650.0" style="-fx-bar-fill: #123456;" stylesheets="@../../../theme.css" title="Expenses Summary">
+            <xAxis>
+                <CategoryAxis label="Expenses type(category)" side="BOTTOM" fx:id="x" />
+            </xAxis>
+            <yAxis>
+                <NumberAxis fx:id="y" label="Total Expenses(tk)" side="LEFT" />
+            </yAxis>
+        </BarChart>
+        <JFXTextField fx:id="totalExpensesTextfield" editable="false" layoutX="1148.0" layoutY="494.0" prefHeight="39.0" prefWidth="159.0" style="-fx-background-color: #ffffff;" stylesheets="@../../../theme.css">
+         <styleClass>
+            <String fx:value="summary-text-field" />
+            <String fx:value="second-text-field" />
+         </styleClass>
+         <effect>
+            <Reflection fraction="0.3" />
+         </effect></JFXTextField>
+        <Label graphicTextGap="22.0" layoutX="952.0" layoutY="502.0" prefHeight="23.0" prefWidth="199.0" text="Total Expense (Bdt) :">
+            <font>
+                <Font name="Californian FB Bold" size="20.0" />
+            </font>
+        </Label>
+      <TableView fx:id="ExpenseSummaryTable" layoutX="675.0" layoutY="66.0" prefHeight="397.0" prefWidth="650.0" styleClass="ta">
+         <columns>
+            <TableColumn fx:id="colID" editable="false" maxWidth="300.0" minWidth="120.0" prefWidth="141.0" text="Expense ID" />
+            <TableColumn fx:id="colType" editable="false" maxWidth="300.0" minWidth="-Infinity" prefWidth="118.0" text="Expense Type" />
+            <TableColumn fx:id="colTitle" editable="false" maxWidth="300.0" minWidth="-Infinity" prefWidth="160.0" text="Expense Title" />
+            <TableColumn fx:id="colDate" editable="false" minWidth="112.0" prefWidth="114.0" text="Date" />
+            <TableColumn fx:id="colBudget" editable="false" maxWidth="390.0" minWidth="-Infinity" prefWidth="115.0" text="Cost (Bdt)" />
+         </columns>
+      </TableView>
+    </children>
+</Pane>

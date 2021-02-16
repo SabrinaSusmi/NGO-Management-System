@@ -1,0 +1,67 @@
+----------------------------------------------------------------------------donor
+drop table donor;
+CREATE TABLE DOnor(
+DOnor_ID varchar2(15) PRIMARY KEY,
+name varchar2(100) not null,
+email varchar2(50) not null,
+gender varchar2(10) not null,
+address varchar2(200) ,
+phone varchar2(20) not null,
+occupation varchar2(20),
+constraint donor_gender check (gender in ('Male','Female','Others')),
+CONSTRAINT email_unique_donor UNIQUE (email),
+CONSTRAINT phone_unique_donor UNIQUE (phone)
+);
+
+
+
+--------------------------- generate donor_id
+set serveroutput on;
+CREATE OR REPLACE FUNCTION GET_donor_id
+RETURN varchar2
+IS
+d_ID varchar2(15);
+yr number;
+id number;
+mn number;
+dd varchar2(10);
+
+BEGIN
+SELECT  max(donor_ID) INTO d_ID FROM donor;
+
+dbms_output.put_line(d_id);
+
+select substr(to_char(sysdate,'YYYYMMDD'),3,4) into dd from dual;
+
+IF d_ID IS NULL --- Does not exist
+THEN
+	id := to_number(dd || '1001');
+	
+ELSE
+select max(substr(donor_id,-4)) into mn from donor ;
+mn:=mn+1;
+	id := to_number(dd||mn);
+	
+END IF;
+
+RETURN NVL(('Don'||id),-1); --- -1 IS THE ERROR FLAG
+
+END;
+/
+
+
+
+------------------------- Calling this from a trigger
+
+CREATE OR REPLACE TRIGGER TRG_GEN_donor_ID
+BEFORE INSERT ON donor
+FOR EACH ROW
+BEGIN
+
+:NEW.donor_ID := get_donor_id();
+
+END;
+/
+
+
+

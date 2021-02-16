@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import de.jensd.fx.glyphs.emojione.EmojiOneView?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.effect.InnerShadow?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" stylesheets="@../../theme.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Accounts.Designation.DesignationDetailsController">
+    <children>
+        <Pane fx:id="designationDetailsPane" prefHeight="1275.0" prefWidth="1473.0">
+            <children>
+                <Label layoutX="172.0" layoutY="7.0" prefHeight="98.0" prefWidth="511.0" text="Designation Details">
+                    <font>
+                        <Font name="Californian FB Bold" size="36.0" />
+                    </font>
+                </Label>
+                <ScrollPane layoutX="199.0" layoutY="518.0" prefHeight="350.0" prefWidth="1174.0">
+                    <content>
+                        <TableView fx:id="designationTable" prefHeight="350.0" prefWidth="1156.0">
+                            <columns>
+                                <TableColumn fx:id="colDesigID" editable="false" maxWidth="300.0" minWidth="225.99996948242188" prefWidth="250.0" text="Designation ID" />
+                                <TableColumn fx:id="colDesigType" editable="false" maxWidth="300.0" minWidth="-Infinity" prefWidth="219.0" text="Designation Type" />
+                                <TableColumn fx:id="colDesigName" editable="false" minWidth="240.0" prefWidth="248.0" text="Designation Name" />
+                                <TableColumn fx:id="colDesigSalary" editable="false" maxWidth="300.0" minWidth="-Infinity" prefWidth="214.0" text="Salary (Bdt)" />
+                        <TableColumn fx:id="colEmpCount" editable="false" maxWidth="319.0" minWidth="204.0" prefWidth="224.0" text="Total Employee" />
+                            </columns>
+                        </TableView>
+                    </content></ScrollPane>
+                <JFXTextField fx:id="searchDesigTextField" focusColor="#900f0f" labelFloat="true" layoutX="242.0" layoutY="447.0" prefHeight="31.0" prefWidth="265.0" promptText="Search" styleClass="search-field">
+                    <font>
+                        <Font size="18.0" />
+                    </font>
+                </JFXTextField>
+                <AnchorPane layoutX="345.0" layoutY="119.0" prefHeight="279.0" prefWidth="712.0" style="-fx-background-color: #212121;">
+                    <children>
+                        <JFXTextField fx:id="desigNameTextField" layoutX="181.0" layoutY="100.0" prefHeight="31.0" prefWidth="350.0" promptText="Designation" />
+                        <JFXTextField fx:id="desigSalaryTextField" layoutX="181.0" layoutY="164.0" prefHeight="30.0" prefWidth="350.0" promptText="Salary (Bdt)" />
+                        <FontAwesomeIconView glyphName="USER_PLUS" layoutX="136.0" layoutY="127.0" size="20" />
+                        <JFXButton graphicTextGap="22.0" layoutX="309.0" layoutY="226.0" onAction="#desigConfirmBtn" onMouseClicked="#desigConfirmBtn" prefHeight="31.0" prefWidth="82.0" styleClass="password-change" text="Add">
+                     <effect>
+                        <InnerShadow choke="0.5" />
+                     </effect></JFXButton>
+                        <JFXComboBox fx:id="desigTypeComboBox" editable="true" labelFloat="true" layoutX="181.0" layoutY="33.0" prefHeight="30.0" prefWidth="350.0" promptText="Category" />
+                  <FontAwesomeIconView glyphName="MONEY" layoutX="135.0" layoutY="190.0" size="20" />
+                  <EmojiOneView glyphName="REGIONAL_INDICATOR_C" layoutX="135.0" layoutY="62.0" size="21" />
+                    </children>
+               <effect>
+                  <DropShadow color="#f88989" offsetY="3.0" radius="22.5" spread="0.17" width="71.0" />
+               </effect>
+                </AnchorPane>
+            <FontAwesomeIconView fx:id="backButton" glyphName="ARROW_LEFT" layoutX="117.0" layoutY="67.0" onMouseClicked="#handleBackButton" size="32.0" styleClass="glyph-icon-back" />
+            </children>
+        </Pane>
+    </children>
+
+</AnchorPane>

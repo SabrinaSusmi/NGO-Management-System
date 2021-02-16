@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXPasswordField?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="loginPane" prefHeight="900.0" prefWidth="1800.0" style="-fx-background-color: #FFFFFF;" stylesheets="@../theme.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Login.LoginController">
+   <children>
+      <ImageView fitHeight="1244.0" fitWidth="1868.0" layoutX="-20.0" layoutY="-142.0" opacity="0.06" pickOnBounds="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <image>
+            <Image url="@../images/background.jpg" />
+         </image>
+      </ImageView>
+      <AnchorPane layoutX="580.0" layoutY="110.0" prefHeight="733.0" prefWidth="750.0" style="-fx-background-color: #212121;" styleClass="bg" stylesheets="@../theme.css">
+         <children>
+            <Button fx:id="loginButton" layoutX="275.0" layoutY="454.0" mnemonicParsing="false" onAction="#handleLogin" onMouseClicked="#handleLogin" opacity="0.82" prefHeight="50.0" prefWidth="200.0" text="Login" textAlignment="CENTER">
+               <textFill>
+                  <LinearGradient endX="1.0" endY="1.0" startX="0.8737864077669902" startY="0.8300970873786409">
+                     <stops>
+                        <Stop color="#140101" />
+                        <Stop color="WHITE" offset="1.0" />
+                     </stops>
+                  </LinearGradient>
+               </textFill>
+               <font>
+                  <Font name="Californian FB Bold" size="18.0" />
+               </font>
+               <effect>
+                  <DropShadow color="#e1cccc" />
+               </effect>
+            </Button>
+            <Label layoutX="323.0" layoutY="40.0" prefHeight="65.0" prefWidth="112.0" text="Sign In" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font name="Californian FB Bold" size="36.0" />
+               </font>
+            </Label>
+            <JFXTextField fx:id="usernameTextfield" labelFloat="true" layoutX="208.0" layoutY="220.0" prefHeight="31.0" prefWidth="370.0" promptText="Username">
+               <font>
+                  <Font size="23.0" />
+               </font>
+            </JFXTextField>
+            <JFXPasswordField fx:id="passwordTextfield" labelFloat="true" layoutX="208.0" layoutY="320.0" prefHeight="31.0" prefWidth="370.0" promptText="Password">
+               <font>
+                  <Font size="23.0" />
+               </font>
+            </JFXPasswordField>
+            <Label fx:id="changePassword" alignment="CENTER" contentDisplay="CENTER" layoutX="309.0" layoutY="562.0" onMouseClicked="#handleChangePassword" prefHeight="24.0" prefWidth="130.0" styleClass="label-password" text="Change Password" textFill="#f2e3e3" />
+            <FontAwesomeIconView glyphName="USER" layoutX="140.0" layoutY="255.0" size="30" />
+            <FontAwesomeIconView glyphName="KEY" layoutX="140.0" layoutY="355.0" size="30" />
+            <Label fx:id="signUp" alignment="CENTER" contentDisplay="CENTER" layoutX="315.0" layoutY="524.0" onMouseClicked="#handleSignUp" prefHeight="24.0" prefWidth="130.0" styleClass="label-password" text="SIGN UP" textFill="#f2e3e3">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <Circle fx:id="Logo" fill="WHITE" radius="85.0" stroke="#e86868" strokeType="INSIDE" strokeWidth="2.0" />
+         </children>
+         <padding>
+            <Insets left="5.0" right="3.0" />
+         </padding>
+         <effect>
+            <DropShadow color="#d78888" height="45.88" offsetX="2.0" offsetY="5.0" radius="25.55" spread="0.59" width="58.32" />
+         </effect>
+      </AnchorPane>
+   </children>
+</AnchorPane>

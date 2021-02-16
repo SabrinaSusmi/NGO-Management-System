@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXDatePicker?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.effect.InnerShadow?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane style="-fx-background-color: #ffe4e1;" styleClass="supply-button" stylesheets="@../../theme.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="EventDetails.ManageEvent.ManageEventEmployeesController">
+    <children>
+        <Pane fx:id="createEventPane" prefHeight="1275.0" prefWidth="1600.0" style="-fx-background-color: ffe4e1;">
+            <children>
+                  <FontAwesomeIconView glyphName="ARROW_LEFT" layoutX="81.0" layoutY="65.0" onMouseClicked="#handleBackBtn" size="28.0" styleClass="glyph-icon-back" wrappingWidth="30.755958557128906" />
+                  <Label graphicTextGap="22.0" layoutX="154.0" layoutY="21.0" prefHeight="67.0" prefWidth="290.0" text="Manage Event">
+                      <font>
+                          <Font name="Californian FB Bold" size="36.0" />
+                      </font>
+                  </Label>
+                <AnchorPane layoutX="375.0" layoutY="179.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="803.0" style="-fx-background-color: #212121;">
+                    <children>
+                        <Button graphicTextGap="22.0" layoutX="363.0" layoutY="577.0" mnemonicParsing="false" onAction="#handleConfirmBtn" style="-fx-background-color: FDAB9F;" stylesheets="@../../theme.css" text="Confirm">
+                            <font>
+                                <Font name="Californian FB" size="18.0" />
+                            </font>
+                     <effect>
+                        <InnerShadow />
+                     </effect>
+                        </Button>
+                        <JFXTextField fx:id="eventName" labelFloat="true" layoutX="236.0" layoutY="105.0" onAction="#handleEventID" onInputMethodTextChanged="#handleEventID" prefHeight="39.0" prefWidth="336.0" promptText="Enter Event ID" stylesheets="@../../theme.css" />
+                        <FontAwesomeIconView glyphName="CALENDAR_ALT" layoutX="174.0" layoutY="135.0" size="25" />
+                        <FontAwesomeIconView glyphName="USERS" layoutX="175.0" layoutY="384.0" size="25" />
+                        <FontAwesomeIconView glyphName="CALENDAR" layoutX="174.0" layoutY="298.0" size="25" />
+                        <FontAwesomeIconView fx:id="docIcon" glyphName="USER_MD" layoutX="175.0" layoutY="462.0" size="25" />
+                        <FontAwesomeIconView glyphName="EYE" layoutX="517.0" layoutY="388.0" onMouseClicked="#handleViewAssignedVolunteers" size="30" />
+                        <FontAwesomeIconView fx:id="supplyList" glyphName="EYE" layoutX="517.0" layoutY="465.0" onMouseClicked="#handleViewAssignedSupply" size="30" />
+                        <FontAwesomeIconView glyphName="PLUS" layoutX="429.0" layoutY="390.0" onMouseClicked="#handleAddVol" size="30" />
+                        <Label layoutX="236.0" layoutY="364.0" text="VOLUNTEERS" textFill="#f3e4e4">
+                            <font>
+                                <Font size="18.0" />
+                            </font>
+                        </Label>
+                        <Label fx:id="eventSupplyName" layoutX="235.0" layoutY="442.0" text="ADD SUPPLY" textFill="#f3e4e4">
+                            <font>
+                                <Font size="18.0" />
+                            </font>
+                        </Label>
+                        <FontAwesomeIconView fx:id="addSupply" glyphName="PLUS" layoutX="429.0" layoutY="465.0" onMouseClicked="#handleAddSupply" size="30" />
+                        <JFXDatePicker fx:id="eventDate" defaultColor="#d7e4e3" layoutX="235.0" layoutY="275.0" prefHeight="39.0" prefWidth="336.0" promptText="Date of the Event" />
+                  <JFXTextField fx:id="eventName1" labelFloat="true" layoutX="234.0" layoutY="184.0" onInputMethodTextChanged="#handleEventID" prefHeight="39.0" prefWidth="336.0" promptText="Event Name" stylesheets="@../../theme.css" />
+                  <FontAwesomeIconView glyphName="CALENDAR_ALT" layoutX="172.0" layoutY="214.0" size="25" />
+                    </children>
+               <effect>
+                  <DropShadow color="#f88989" offsetY="3.0" radius="22.5" spread="0.17" width="71.0" />
+               </effect>
+                </AnchorPane>
+            </children>
+        </Pane>
+    </children>
+</AnchorPane>

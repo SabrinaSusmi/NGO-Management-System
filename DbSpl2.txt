@@ -1,0 +1,929 @@
+--------------designation------
+create table designation(
+id varchar2(10) primary key,
+designation_name varchar2(100),
+type varchar2(15) not null,
+amount number,
+constraint desig_type check (type in ('Doctor','Employee'))
+);
+
+
+
+---- generate designation_id
+set serveroutput on;
+CREATE OR REPLACE FUNCTION GET_designation_id(dtype varchar2)
+RETURN varchar2
+IS
+d_ID varchar2(10);
+tp varchar2(2);
+id number;
+aa number;
+BEGIN
+SELECT  max(ID) INTO d_ID FROM designation;
+
+dbms_output.put_line(d_id);
+if dtype='Doctor' then tp:='D';
+else tp:='E';
+end if;
+
+IF d_ID IS NULL --- Does not exist
+THEN
+	id := 1001;
+	
+ELSE
+select max(substr(id,2)) into id from designation ;
+
+	id := id + 1;
+	
+END IF;
+
+RETURN NVL((tp||id),-1); --- -1 IS THE ERROR FLAG
+
+END;
+/
+
+--- Calling this from a trigger
+
+CREATE OR REPLACE TRIGGER TRG_GEN_desig_ID
+BEFORE INSERT ON designation
+FOR EACH ROW
+BEGIN
+
+:NEW.ID := get_designation_id(:NEW.type);
+
+END;
+/
+
+
+
+
+
+-------------employee
+create TABLE EMPLOYEE(
+emp_id number ,
+name varchar2(100) not null,
+password  varchar2(200) not null,
+email varchar2(50) not null,
+dob date ,
+gender varchar2(10) ,
+address varchar2(200) ,
+phone varchar2(20),
+DESIGNATION varchar2(50) ,
+constraint emp_desig foreign key(DESIGNATION) references designation(id),
+constraint emp_gender check (gender in ('Male','Female','Others')),
+CONSTRAINT EMP_ID_PK PRIMARY KEY(EMP_ID),
+CONSTRAINT email_unique_employee UNIQUE (email),
+CONSTRAINT phone_unique_employee UNIQUE (phone)
+);
+
+
+---- generate emp_id
+CREATE OR REPLACE FUNCTION GET_Employee_ID(emp_name varchar2,email_p varchar2)
+RETURN number
+IS
+V_ID number;
+yr number;
+mn number;
+dd varchar2(10);
+BEGIN
+SELECT  max(emp_ID) INTO V_ID
+FROM employee;
+
+select substr(to_char(sysdate,'YYYYMMDD'),3,4) into dd from dual;
+
+IF V_ID IS NULL --- Does not exist
+THEN
+	V_ID := to_number(dd || '1001');
+	
+ELSE
+	select max(substr(emp_id,-4)) into mn from employee ;
+
+	mn:=mn+1;
+	v_id := to_number(dd||mn);
+	
+END IF;
+
+RETURN NVL(V_ID,-1); --- -1 IS THE ERROR FLAG
+
+END GET_Employee_ID;
+/
+
+
+-------------------------- Calling this from a trigger
+
+CREATE OR REPLACE TRIGGER TRG_GEN_emp_ID
+BEFORE INSERT ON employee
+FOR EACH ROW
+BEGIN
+
+:NEW.emp_ID := GET_Employee_ID(:NEW.name,:NEW.email);
+
+END;
+/
+
+
+
+
+
+
+----check email,phone validation
+create or replace function check_validation(email_f varchar2,phone_f varchar2)
+return varchar2
+is
+email_isValid boolean;
+phone_isValid boolean;
+begin
+email_isvalid :=
+      REGEXP_LIKE (email_f,'^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$');
+phone_isValid:= REGEXP_LIKE (phone_f,'^[+]+[8]{2}+[0]+[1]+[0-9]{9}|[8]{2}+[0]+[1]+[0-9]{9}|[0]+[1]+[0-9]{9}$');
+
+IF (email_isvalid and phone_isValid)
+     then  return 'TRUE';
+else return 'False';
+end if;
+
+end;
+/
+
+
+----check password validation
+create or replace function check_password(pass_f varchar2)
+return varchar2
+is
+pass_isValid boolean;
+
+begin
+pass_isValid := REGEXP_LIKE(pass_f, '^.*[0-9]')  AND REGEXP_LIKE(pass_f, '^[a-zA-Z0-9][a-zA-Z0-9 ._%+-]{7,}$');
+
+IF pass_isValid
+     then  return 'TRUE';
+else return 'False';
+end if;
+
+end;
+/
+
+
+
+
+-----------------------------------------------------------------------------------doctor
+CREATE TABLE DOCTOR(
+DOCTOR_ID varchar2(12) PRIMARY KEY,
+name varchar2(100) not null,
+email varchar2(50) not null,
+dob date not null,
+gender varchar2(10) not null,
+address varchar2(200) not null,
+phone varchar2(20) not null,
+speciality varchar2(50) NOT NULL,
+Available_hr varchar2(20),
+QUALIFICATION VARCHAR2(100) not null,
+password varchar2(200),
+constraint doc_desig foreign key(speciality) references designation(id),
+constraint doctor_gender check (gender in ('Male','Female','Others')),
+CONSTRAINT email_unique_doctor UNIQUE (email),
+CONSTRAINT phone_unique_doctor UNIQUE (phone)
+);
+
+
+--------------------------- generate doctor_id
+set serveroutput on;
+CREATE OR REPLACE FUNCTION GET_doctor_id
+RETURN varchar2
+IS
+d_ID varchar2(12);
+yr number;
+id number;
+mn number;
+dd varchar2(12);
+BEGIN
+SELECT  max(doctor_ID) INTO d_ID FROM doctor;
+
+dbms_output.put_line(d_id);
+select substr(to_char(sysdate,'YYYYMMDD'),3,4) into dd from dual;
+
+IF d_ID IS NULL --- Does not exist
+THEN
+	id := to_number(dd || '101');
+	
+ELSE
+select max(substr(Doctor_id,-3)) into mn from doctor ;
+
+	mn:=mn+1;
+	id := to_number(dd||mn);
+	
+END IF;
+
+RETURN NVL(('D'||id),-1); --- -1 IS THE ERROR FLAG
+
+END;
+/
+
+
+-------------- Calling this from a trigger
+
+CREATE OR REPLACE TRIGGER TRG_GEN_doctor_ID
+BEFORE INSERT ON doctor
+FOR EACH ROW
+BEGIN
+
+:NEW.doctor_ID := get_doctor_id();
+
+END;
+/
+
+
+----------------------------------------------------------------------------donor
+CREATE TABLE DOnor(
+DOnor_ID varchar2(15) PRIMARY KEY,
+name varchar2(100) not null,
+email varchar2(50) not null,
+gender varchar2(10) not null,
+address varchar2(200) ,
+phone varchar2(20) not null,
+occupation varchar2(20),
+constraint donor_gender check (gender in ('Male','Female','Others')),
+CONSTRAINT email_unique_donor UNIQUE (email),
+CONSTRAINT phone_unique_donor UNIQUE (phone)
+);
+
+
+
+--------------------------- generate donor_id
+set serveroutput on;
+CREATE OR REPLACE FUNCTION GET_donor_id
+RETURN varchar2
+IS
+d_ID varchar2(15);
+yr number;
+id number;
+mn number;
+dd varchar2(10);
+
+BEGIN
+SELECT  max(donor_ID) INTO d_ID FROM donor;
+
+dbms_output.put_line(d_id);
+
+select substr(to_char(sysdate,'YYYYMMDD'),3,4) into dd from dual;
+
+IF d_ID IS NULL --- Does not exist
+THEN
+	id := to_number(dd || '1001');
+	
+ELSE
+select max(substr(donor_id,-4)) into mn from donor ;
+mn:=mn+1;
+	id := to_number(dd||mn);
+	
+END IF;
+
+RETURN NVL(('Don'||id),-1); --- -1 IS THE ERROR FLAG
+
+END;
+/
+
+
+
+------------------------- Calling this from a trigger
+
+CREATE OR REPLACE TRIGGER TRG_GEN_donor_ID
+BEFORE INSERT ON donor
+FOR EACH ROW
+BEGIN
+
+:NEW.donor_ID := get_donor_id();
+
+END;
+/
+
+
+create table donation_history(
+id varchar2(20) primary key,
+don_date date ,
+amount number,
+donor_id varchar2(15),
+constraint don_history_fk foreign key (donor_id) references donor(donor_id)
+);
+
+
+
+---------------------- generate donation_id
+set serveroutput on;
+CREATE OR REPLACE FUNCTION GET_donation_id
+RETURN varchar2
+IS
+d_ID varchar2(20);
+id number;
+
+
+BEGIN
+SELECT  max(ID) INTO d_ID FROM donation_history;
+
+IF d_ID IS NULL --- Does not exist
+THEN
+	id := 101;
+
+ELSE
+select max(substr(id,3)) into id from donation_history ;
+
+	id := id+1;
+
+END IF;
+
+RETURN NVL(('DT'||id),-1); --- -1 IS THE ERROR FLAG
+
+END;
+/
+
+
+---------------- Calling this from a trigger
+
+CREATE OR REPLACE TRIGGER TRG_GEN_donation_ID
+BEFORE INSERT ON donation_history
+FOR EACH ROW
+BEGIN
+
+:NEW.ID := get_donation_id();
+
+END;
+/
+
+-------------------------------------------volunteer
+CREATE TABLE volunteer(
+volunteer_ID varchar2(15) PRIMARY KEY,
+name varchar2(100) not null,
+email varchar2(50) not null,
+gender varchar2(10) not null,
+address varchar2(200) ,
+phone varchar2(20) not null,
+occupation varchar2(50),
+constraint volunteer_gender check (gender in ('Male','Female','Others')),
+CONSTRAINT email_unique_volunteer UNIQUE (email),
+CONSTRAINT phone_unique_volunteer UNIQUE (phone)
+);
+
+--------------------- generate volunteer_id
+set serveroutput on;
+CREATE OR REPLACE FUNCTION GET_volunteer_id
+RETURN varchar2
+IS
+d_ID varchar2(15);
+yr number;
+id number;
+mn number;
+dd varchar2(10);
+
+BEGIN
+SELECT  max(volunteer_ID) INTO d_ID FROM volunteer;
+
+dbms_output.put_line(d_id);
+
+select substr(to_char(sysdate,'YYYYMMDD'),3,4) into dd from dual;
+
+IF d_ID IS NULL --- Does not exist
+THEN
+	id := to_number(dd || '1001');
+	
+ELSE
+select max(substr(volunteer_id,-4)) into mn from volunteer ;
+mn:=mn+1;
+	id := to_number(dd||mn);
+	
+END IF;
+
+RETURN NVL(('Vol'||id),-1); --- -1 IS THE ERROR FLAG
+
+END;
+/
+
+---------------------------------- Calling this from a trigger
+
+CREATE OR REPLACE TRIGGER TRG_GEN_volunteer_ID
+BEFORE INSERT ON volunteer
+FOR EACH ROW
+BEGIN
+
+:NEW.volunteer_ID := get_volunteer_id();
+
+END;
+/
+
+
+-----------------------------------get designation for reg
+create or replace function get_designation(idf number)
+return varchar2
+is
+desig varchar2(100);
+des varchar2(100);
+pos varchar2(100);
+begin
+select designation into pos from employee where emp_id=idf;
+if pos is null then desig:='N/A'; 
+else select designation_name into desig from designation,employee where employee.designation=designation.id and emp_id=idf;
+
+end if;
+return desig;
+end;
+/
+
+
+---------------------show Doctor salary
+create or replace function show_Doctor_Salary(doc_id varchar2)
+return number
+is 
+salary number;
+begin
+select amount into salary from doctor,designation where speciality=id and doctor_id=doc_id;
+return salary;
+end;
+/
+
+---------show employee salary
+create or replace function show_employee_Salary(e_id varchar2)
+return number
+is 
+salary number;
+begin
+select amount into salary from employee,designation where designation=id and emp_id=e_id;
+
+return salary;
+end;
+/
+
+
+------------------------count the total number of employee
+create or replace function num_of_employee(desig varchar2,fid varchar2)
+return number
+is 
+types varchar2(10);
+total number;
+begin
+select lpad(fid,'1') into types from dual;
+if types='E' then
+select count(designation)into total from designation d,employee where d.id=designation and designation_name=desig;
+elsif types='D' then
+select count(speciality)into total from designation d,doctor where d.id=speciality and designation_name=desig;
+end if;
+return total;
+end;
+/
+
+
+--------------------------------------------
+--------------------------------------------
+---------------------SUPPLY DETAILS
+
+--------FOOD
+
+CREATE TABLE FOOD(
+ID VARCHAR2(15) PRIMARY KEY,
+NAME VARCHAR2(30) NOT NULL,
+PURCHASE_DATE DATE NOT NULL,
+EXPIRE_DATE DATE,
+QTY NUMBER NOT NULL,
+SUPPLIER VARCHAR2(30) NOT NULL,
+UNIT_PRICE NUMBER NOT NULL,
+total_qty number
+);
+
+-----------------------------GENERATE FOOD ID
+set serveroutput on;
+CREATE OR REPLACE FUNCTION GET_FOOD_id(F_DATE DATE)
+RETURN varchar2
+IS
+d_ID varchar2(15);
+id varchar2(15);
+vv number;
+dd varchar2(10);
+
+BEGIN
+SELECT  max(ID) INTO d_ID FROM FOOD;
+select substr(to_char(f_date,'YYYYMMDD'),5) into dd from dual;
+
+IF d_ID IS NULL --- Does not exist
+THEN
+    id :=  dd || '10001' ;
+	
+ELSE
+select max(substr(id,-5)) into vv from FOOD ;
+    vv := vv + 1;
+	id :=  dd || to_char(vv);
+    
+END IF;
+
+RETURN NVL( ('F' || id) , -1); --- -1 IS THE ERROR FLAG
+
+END;
+/
+
+-------------------- Calling this from a trigger
+
+CREATE OR REPLACE TRIGGER TRG_GEN_FOOD_ID
+BEFORE INSERT ON FOOD
+FOR EACH ROW
+BEGIN
+
+:NEW.ID := get_FOOD_id(:NEW.PURCHASE_DATE);
+
+END;
+/
+
+
+
+
+---------------------------HEALTH_PRODUCT
+CREATE TABLE HEALTH_PRODUCT(
+ID VARCHAR2(15) PRIMARY KEY,
+NAME VARCHAR2(30) NOT NULL,
+PURCHASE_DATE DATE NOT NULL,
+EXPIRE_DATE DATE NOT NULL,
+QTY NUMBER NOT NULL,
+SUPPLIER VARCHAR2(30) NOT NULL,
+MANUFACTURER VARCHAR2(30) NOT NULL,
+UNIT_PRICE NUMBER NOT NULL,
+type NUMBER NOT NULL,
+total_qty number
+);
+
+-----------------------------GENERATE HEALTH_PRODUCT ID
+set serveroutput on;
+CREATE OR REPLACE FUNCTION GET_HEALTH_PRODUCT_id(F_DATE DATE,f_type number)
+RETURN varchar2
+IS
+d_ID varchar2(15);
+id varchar2(15);
+vv number;
+dd varchar2(10);
+types varchar2(2);
+
+BEGIN
+SELECT  max(ID) INTO d_ID FROM HEALTH_PRODUCT;
+if f_type=1 then types:='M';
+elsif f_type=2 then types:='V';
+elsif f_type=3 then types:='E';
+end if;
+select substr(to_char(f_date,'YYYYMMDD'),5) into dd from dual;
+
+IF d_ID IS NULL --- Does not exist
+THEN
+    id :=  dd || '10001' ;
+	
+ELSE
+select max(substr(id,-5)) into vv from HEALTH_PRODUCT ;
+    vv := vv + 1;
+	id :=  dd || to_char(vv);
+    
+END IF;
+
+RETURN NVL( (types || id) , -1); --- -1 IS THE ERROR FLAG
+
+END;
+/
+
+----------------------------------- Calling this from a trigger
+
+CREATE OR REPLACE TRIGGER TRG_GEN_HEALTH_PRODUCT_ID
+BEFORE INSERT ON HEALTH_PRODUCT
+FOR EACH ROW
+BEGIN
+
+:NEW.ID := get_HEALTH_PRODUCT_id(:NEW.PURCHASE_DATE,:new.type);
+
+END;
+/
+
+
+
+-------------------------------------event details
+create table event_details(
+id varchar2(20) primary key,
+name varchar2(50) not null,
+event_date date not null,
+type number not null,
+est_budget number,
+actual_budget number
+);
+
+----------------------------event id generate
+CREATE OR REPLACE FUNCTION GET_EVENT_id(F_DATE DATE,f_type number)
+RETURN varchar2
+IS
+d_ID varchar2(20);
+id varchar2(20);
+vv number;
+dd varchar2(10);
+types varchar2(5);
+
+BEGIN
+SELECT  max(ID) INTO d_ID FROM event_details;
+if f_type=1 then types:='F_Ev';
+elsif f_type=2 then types:='H_Ev';
+end if;
+dbms_output.put_line(f_date);
+select substr(to_char(f_date,'YYYYMMDD'),3,4) into dd from dual;
+
+ dbms_output.put_line(dd);
+
+
+IF d_ID IS NULL --- Does not exist
+THEN
+    id :=  dd || '10001' ;
+
+ELSE
+select max(substr(id,-5)) into vv from event_details ;
+    vv := vv + 1;
+	id :=  dd || to_char(vv);
+
+END IF;
+
+RETURN NVL( (types || id) , -1); --- -1 IS THE ERROR FLAG
+
+END;
+/
+
+--- Calling this from a trigger
+
+CREATE OR REPLACE TRIGGER TRG_GEN_EVENT_ID
+BEFORE INSERT ON event_details
+FOR EACH ROW
+BEGIN
+
+:NEW.ID := GET_EVENT_id(:NEW.event_date,:new.type);
+
+END;
+/
+
+----------------------------------------GET_actual_budget
+CREATE OR REPLACE FUNCTION GET_actual_budget(f_eventID varchar2,f_prod_name varchar2,f_amt number)
+RETURN number
+IS
+
+total_price number;
+amt number;
+types number;
+price number;
+
+BEGIN
+if substr(f_eventID,1,1)='F' then
+select max(unit_price) into price from food where name=f_prod_name;
+elsif substr(f_eventID,1,1)='H' then
+select max(unit_price) into price from health_product where name=f_prod_name;
+end if;
+
+total_price:=f_amt*price;
+RETURN NVL( total_price , -1); --- -1 IS THE ERROR FLAG
+
+END;
+/
+
+
+------------------------------junction table
+create table event_employee(
+event_id varchar2(20) ,
+employee_id number,
+constraint event_employee_pk primary key(event_id,employee_id) ,
+constraint emp_event_employee foreign key(employee_id) references employee(emp_id),
+constraint event_id_event_employee foreign key(event_id) references event_details(id)
+);
+
+
+create table event_volunteer(
+event_id varchar2(20),
+volunteer_id varchar2(20),
+constraint event_person_pk primary key(event_id,volunteer_id) ,
+constraint event_event_volunteer foreign key(event_id) references event_details(id),
+constraint vol_event_volunteer foreign key(volunteer_id) references volunteer(volunteer_id)
+);
+
+
+create table event_doctor(
+event_id varchar2(20) ,
+doctor_id varchar2(20),
+constraint event_doctor_pk primary key(event_id,doctor_id) ,
+constraint event_event_doctor foreign key(event_id) references event_details(id),
+constraint doc_event_doctor foreign key(doctor_id) references doctor(doctor_id)
+);
+
+
+create table event_food(
+event_id varchar2(20),
+food_name VARCHAR2(30),
+amount number,
+constraint event_food_pk primary key(event_id,food_name),
+constraint event_event_food foreign key(event_id) references event_details(id)
+);
+
+
+create table event_health(
+event_id varchar2(20),
+health_name VARCHAR2(15),
+amount number,
+constraint event_health_pk primary key(event_id,health_name),
+constraint event_event_health foreign key(event_id) references event_details(id)
+);
+
+
+-------------------------------------------------------(Accounts)Expenses table
+create table expenses(
+expenses_id varchar2(250) primary key,
+type varchar2(200) not null,
+title varchar2(100) not null,
+description varchar2(200),
+amount number not null,
+expense_date date not null,
+constraint type check (type in ('Utility','Salary','Others'))
+);
+
+------------------------------generate expense id
+CREATE OR REPLACE FUNCTION GET_Expense_id(f_type varchar2)
+RETURN varchar2
+IS
+d_ID varchar2(15);
+id varchar2(15);
+vv number;
+types varchar2(50);
+
+BEGIN
+SELECT  max(expenses_id) INTO d_ID FROM expenses;
+if f_type='Utility' then types:='UTIL';
+elsif f_type='Salary' then types:='SAL';
+else types:='OTRS';
+end if;
+
+IF d_ID IS NULL --- Does not exist
+THEN
+    id :=  types || '80001' ;
+
+ELSE
+select max(substr(expenses_id,-5)) into vv from expenses ;
+    vv := vv + 1;
+	id :=  types || to_char(vv);
+
+END IF;
+
+RETURN NVL( (id) , -1); --- -1 IS THE ERROR FLAG
+
+END;
+/
+--- Calling this from a trigger
+
+CREATE OR REPLACE TRIGGER TRG_GEN_EXPENSE_ID
+BEFORE INSERT ON expenses
+FOR EACH ROW
+BEGIN
+
+:NEW.expenses_id := GET_Expense_id(:new.type);
+
+END;
+/
+
+-----------------------import from txt file
+create or replace directory dir as 'E:\csv';
+
+--------------------------------------------------------import file for employee add
+set serveroutput on;
+create or replace procedure add_employee(filename varchar2)
+is
+F UTL_FILE.FILE_TYPE;
+V_LINE VARCHAR2 (10000);
+pname VARCHAR2 (100);
+ppass VARCHAR2 (200);
+pemail VARCHAR2 (100);
+pdob date;
+pgender VARCHAR2 (100);
+paddress VARCHAR2 (100);
+pphone VARCHAR2 (16);
+begin
+
+F := UTL_FILE.FOPEN ('DIR', filename, 'R');
+IF UTL_FILE.IS_OPEN(F) THEN
+      LOOP
+        BEGIN
+          UTL_FILE.GET_LINE(F, V_LINE, 10000);
+          IF V_LINE IS NULL THEN
+            EXIT;
+          END IF;
+pname:=REGEXP_SUBSTR(V_LINE, '[^,]+', 1, 1);
+ppass:=REGEXP_SUBSTR(V_LINE, '[^,]+', 1, 2);
+pemail:=REGEXP_SUBSTR(V_LINE, '[^,]+', 1, 3);
+pdob:=to_date(REGEXP_SUBSTR(V_LINE, '[^,]+', 1, 4),'DD/MM/YYYY');
+pgender:=REGEXP_SUBSTR(V_LINE, '[^,]+', 1, 5);
+paddress:=REGEXP_SUBSTR(V_LINE, '[^,]+', 1, 6);
+pphone:=REGEXP_SUBSTR(V_LINE, '[^,]+', 1, 7);
+
+
+insert into employee(name,password,email,dob,gender,address,phone)
+        values(pname,ppass,pemail,pdob,pgender,paddress,pphone);
+commit;
+exception
+when no_data_found then exit;
+end;
+end loop;
+END IF;
+    UTL_FILE.FCLOSE(F);
+end;
+/
+
+--------------------------------------------------------------------import file for donor add
+set serveroutput on;
+create or replace procedure add_donor(filename varchar2)
+is
+F UTL_FILE.FILE_TYPE;
+V_LINE VARCHAR2 (10000);
+pname VARCHAR2 (100);
+pemail VARCHAR2 (100);
+pgender VARCHAR2 (100);
+paddress VARCHAR2 (100);
+pphone VARCHAR2(16);
+poccupation varchar2(100);
+begin
+
+F := UTL_FILE.FOPEN ('DIR', filename, 'R');
+IF UTL_FILE.IS_OPEN(F) THEN
+      LOOP
+        BEGIN
+          UTL_FILE.GET_LINE(F, V_LINE, 10000);
+          IF V_LINE IS NULL THEN
+            EXIT;
+          END IF;
+pname:=REGEXP_SUBSTR(V_LINE, '[^,]+', 1, 1);
+pemail:=REGEXP_SUBSTR(V_LINE, '[^,]+', 1, 2);
+pgender:=REGEXP_SUBSTR(V_LINE, '[^,]+', 1, 3);
+paddress:=REGEXP_SUBSTR(V_LINE, '[^,]+', 1, 4);
+pphone:=REGEXP_SUBSTR(V_LINE, '[^,]+', 1, 5);
+poccupation:=REGEXP_SUBSTR(V_LINE, '[^,]+', 1, 6);
+
+
+insert into donor(name,email,gender,address,phone,occupation)
+        values(pname,pemail,pgender,paddress,pphone,poccupation);
+commit;
+exception
+when no_data_found then exit;
+end;
+end loop;
+END IF;
+    UTL_FILE.FCLOSE(F);
+end;
+/
+
+
+----------------import file for volunteer add
+set serveroutput on;
+create or replace procedure add_volunteer(filename varchar2)
+is
+F UTL_FILE.FILE_TYPE;
+V_LINE VARCHAR2 (10000);
+pname VARCHAR2 (100);
+pemail VARCHAR2 (100);
+pgender VARCHAR2 (100);
+paddress VARCHAR2 (100);
+pphone VARCHAR2(16);
+poccupation varchar2(100);
+begin
+
+F := UTL_FILE.FOPEN ('DIR', filename, 'R');
+IF UTL_FILE.IS_OPEN(F) THEN
+      LOOP
+        BEGIN
+          UTL_FILE.GET_LINE(F, V_LINE, 10000);
+          IF V_LINE IS NULL THEN
+            EXIT;
+          END IF;
+pname:=REGEXP_SUBSTR(V_LINE, '[^,]+', 1, 1);
+pemail:=REGEXP_SUBSTR(V_LINE, '[^,]+', 1, 2);
+pgender:=REGEXP_SUBSTR(V_LINE, '[^,]+', 1, 3);
+paddress:=REGEXP_SUBSTR(V_LINE, '[^,]+', 1, 4);
+pphone:=REGEXP_SUBSTR(V_LINE, '[^,]+', 1, 5);
+poccupation:=REGEXP_SUBSTR(V_LINE, '[^,]+', 1, 6);
+
+
+insert into volunteer(name,email,gender,address,phone,occupation)
+        values(pname,pemail,pgender,paddress,pphone,poccupation);
+commit;
+exception
+when no_data_found then exit;
+end;
+end loop;
+END IF;
+    UTL_FILE.FCLOSE(F);
+end;
+/
+
+
+drop table expenses;
+drop table event_health;
+drop table event_food;
+drop table event_doctor;
+drop table event_volunteer;
+drop table event_employee;
+drop table event_details;
+DROP TABLE HEALTH_PRODUCT;
+DROP TABLE FOOD;
+DROP TABLE volunteer;
+DROP TABLE donation_history;
+DROP TABLE DOnor;
+DROP TABLE DOCTOR;
+DROP TABLE EMPLOYEE;
+DROP TABLE designation;
+DROP TABLE

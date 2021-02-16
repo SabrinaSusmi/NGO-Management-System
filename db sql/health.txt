@@ -1,0 +1,63 @@
+---------------------------HEALTH_PRODUCT
+drop table HEALTH_PRODUCT;
+CREATE TABLE HEALTH_PRODUCT(
+ID VARCHAR2(15) PRIMARY KEY,
+NAME VARCHAR2(30) NOT NULL,
+PURCHASE_DATE DATE NOT NULL,
+EXPIRE_DATE DATE NOT NULL,
+QTY NUMBER NOT NULL,
+SUPPLIER VARCHAR2(30) NOT NULL,
+MANUFACTURER VARCHAR2(30) NOT NULL,
+UNIT_PRICE NUMBER NOT NULL,
+type NUMBER NOT NULL,
+total_qty number
+);
+
+
+-----------------------------GENERATE HEALTH_PRODUCT ID
+set serveroutput on;
+CREATE OR REPLACE FUNCTION GET_HEALTH_PRODUCT_id(F_DATE DATE,f_type number)
+RETURN varchar2
+IS
+d_ID varchar2(15);
+id varchar2(15);
+vv number;
+dd varchar2(10);
+types varchar2(2);
+
+BEGIN
+SELECT  max(ID) INTO d_ID FROM HEALTH_PRODUCT;
+if f_type=1 then types:='M';
+elsif f_type=2 then types:='V';
+elsif f_type=3 then types:='E';
+end if;
+select substr(to_char(f_date,'YYYYMMDD'),5) into dd from dual;
+
+IF d_ID IS NULL --- Does not exist
+THEN
+    id :=  dd || '10001' ;
+	
+ELSE
+select max(substr(id,-5)) into vv from HEALTH_PRODUCT ;
+    vv := vv + 1;
+	id :=  dd || to_char(vv);
+    
+END IF;
+
+RETURN NVL( (types || id) , -1); --- -1 IS THE ERROR FLAG
+
+END;
+/
+
+
+----------------------------------- Calling this from a trigger
+
+CREATE OR REPLACE TRIGGER TRG_GEN_HEALTH_PRODUCT_ID
+BEFORE INSERT ON HEALTH_PRODUCT
+FOR EACH ROW
+BEGIN
+
+:NEW.ID := get_HEALTH_PRODUCT_id(:NEW.PURCHASE_DATE,:new.type);
+
+END;
+/

@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="registerPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.EmployeeDetails">
+    <children>
+        <ImageView fitHeight="1293.0" fitWidth="1920.0" layoutY="-8.0" opacity="0.16" pickOnBounds="true" AnchorPane.bottomAnchor="-3.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-8.0">
+            <image>
+                <Image url="@../images/back.jpg" />
+            </image>
+        </ImageView>
+      <VBox alignment="TOP_CENTER" layoutX="-5.0" opacity="0.8" prefHeight="1282.0" prefWidth="450.0" style="-fx-background-color: #8B0000;" AnchorPane.topAnchor="0.0">
+         <children>
+            <Label text="WELCOME" textFill="WHITE">
+               <VBox.margin>
+                  <Insets left="50.0" right="50.0" top="50.0" />
+               </VBox.margin>
+               <font>
+                  <Font name="System Bold" size="32.0" />
+               </font>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+            </Label>
+            <Label graphicTextGap="22.0" text="TO" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="32.0" />
+               </font>
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+            </Label>
+            <Label graphicTextGap="22.0" text="ASTHA" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="32.0" />
+               </font>
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+            </Label>
+            <Button alignment="BASELINE_CENTER" graphicTextGap="22.0" mnemonicParsing="false" prefHeight="54.0" prefWidth="544.0" style="-fx-background-color: fff4f2;" text="Employee Details">
+               <font>
+                  <Font name="System Bold" size="25.0" />
+               </font>
+               <VBox.margin>
+                  <Insets top="60.0" />
+               </VBox.margin>
+            </Button>
+            <Button alignment="BASELINE_CENTER" graphicTextGap="22.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="544.0" style="-fx-background-color: fff4f2;" text="Donor Details">
+               <font>
+                  <Font name="System Bold" size="25.0" />
+               </font>
+               <VBox.margin>
+                  <Insets top="20.0" />
+               </VBox.margin>
+            </Button>
+            <Button alignment="BASELINE_CENTER" graphicTextGap="22.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="544.0" style="-fx-background-color: fff4f2;" text="Volunteer Details">
+               <font>
+                  <Font name="System Bold" size="25.0" />
+               </font>
+               <VBox.margin>
+                  <Insets top="20.0" />
+               </VBox.margin>
+            </Button>
+            <Button alignment="BASELINE_CENTER" graphicTextGap="22.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="544.0" style="-fx-background-color: fff4f2;" text="Supply Details">
+               <font>
+                  <Font name="System Bold" size="25.0" />
+               </font>
+               <VBox.margin>
+                  <Insets top="20.0" />
+               </VBox.margin>
+            </Button>
+            <Button alignment="BASELINE_CENTER" graphicTextGap="22.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="544.0" style="-fx-background-color: fff4f2;" text="Services">
+               <VBox.margin>
+                  <Insets top="20.0" />
+               </VBox.margin>
+               <font>
+                  <Font name="System Bold" size="25.0" />
+               </font>
+            </Button>
+            <Button alignment="BASELINE_CENTER" graphicTextGap="22.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="544.0" style="-fx-background-color: fff4f2;" text="Accounts">
+               <font>
+                  <Font name="System Bold" size="25.0" />
+               </font>
+               <VBox.margin>
+                  <Insets top="20.0" />
+               </VBox.margin>
+            </Button>
+            <Button alignment="BASELINE_CENTER" graphicTextGap="22.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="371.0" style="-fx-background-color: fff4f2;" text="Log Out">
+               <VBox.margin>
+                  <Insets top="60.0" />
+               </VBox.margin>
+               <font>
+                  <Font name="System Bold" size="25.0" />
+               </font>
+            </Button>
+         </children>
+      </VBox>
+      <Pane layoutX="446.0" layoutY="-1.0" prefHeight="1282.0" prefWidth="1476.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="446.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Label layoutX="63.0" layoutY="52.0" prefHeight="98.0" prefWidth="511.0" text="Employee Details">
+               <font>
+                  <Font name="System Bold" size="30.0" />
+               </font>
+            </Label>
+            <HBox alignment="CENTER_LEFT" layoutY="169.0" prefHeight="98.0" prefWidth="1426.0">
+               <padding>
+                  <Insets left="100.0" />
+               </padding>
+               <children>
+                  <Button alignment="BASELINE_CENTER" graphicTextGap="22.0" mnemonicParsing="false" prefHeight="55.0" prefWidth="330.0" style="-fx-background-color: FDAB9F;" text="Add New Employee">
+                     <font>
+                        <Font name="System Bold" size="25.0" />
+                     </font>
+                  </Button>
+                  <Button alignment="BASELINE_CENTER" graphicTextGap="22.0" mnemonicParsing="false" prefHeight="55.0" prefWidth="330.0" style="-fx-background-color: FDAB9F;" text="Update Information">
+                     <font>
+                        <Font name="System Bold" size="25.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="100.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Button alignment="BASELINE_CENTER" graphicTextGap="22.0" mnemonicParsing="false" prefHeight="55.0" prefWidth="330.0" style="-fx-background-color: FDAB9F;" text="Delete Employee">
+                     <font>
+                        <Font name="System Bold" size="25.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="100.0" />
+                     </HBox.margin>
+                  </Button>
+               </children>
+            </HBox>
+            <ScrollPane layoutX="153.0" layoutY="319.0" prefHeight="673.0" prefWidth="1178.0">
+               <content>
+                  <TableView prefHeight="669.0" prefWidth="1184.0">
+                    <columns>
+                      <TableColumn editable="false" maxWidth="300.0" minWidth="250.0" prefWidth="250.0" text="Name" />
+                      <TableColumn editable="false" minWidth="250.0" prefWidth="250.0" text="Email" />
+                        <TableColumn editable="false" maxWidth="300.0" minWidth="-Infinity" prefWidth="250.0" text="Phone No" />
+                        <TableColumn editable="false" maxWidth="300.0" minWidth="-Infinity" prefWidth="250.0" text="Address" />
+                        <TableColumn editable="false" maxWidth="300.0" minWidth="-Infinity" prefWidth="250.0" text="Designation" />
+                    </columns>
+                  </TableView>
+               </content>
+            </ScrollPane>
+         </children>
+      </Pane>
+    </children>
+</AnchorPane>

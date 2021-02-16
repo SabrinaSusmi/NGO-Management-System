@@ -1,0 +1,60 @@
+--------FOOD
+drop table food;
+CREATE TABLE FOOD(
+ID VARCHAR2(15) PRIMARY KEY,
+NAME VARCHAR2(30) NOT NULL,
+PURCHASE_DATE DATE NOT NULL,
+EXPIRE_DATE DATE,
+QTY NUMBER NOT NULL,
+SUPPLIER VARCHAR2(30) NOT NULL,
+UNIT_PRICE NUMBER NOT NULL,
+total_qty number
+);
+
+
+-----------------------------GENERATE FOOD ID
+set serveroutput on;
+CREATE OR REPLACE FUNCTION GET_FOOD_id(F_DATE DATE)
+RETURN varchar2
+IS
+d_ID varchar2(15);
+id varchar2(15);
+vv number;
+dd varchar2(10);
+
+BEGIN
+SELECT  max(ID) INTO d_ID FROM FOOD;
+select substr(to_char(f_date,'YYYYMMDD'),5) into dd from dual;
+
+IF d_ID IS NULL --- Does not exist
+THEN
+    id :=  dd || '10001' ;
+	
+ELSE
+select max(substr(id,-5)) into vv from FOOD ;
+    vv := vv + 1;
+	id :=  dd || to_char(vv);
+    
+END IF;
+
+RETURN NVL( ('F' || id) , -1); --- -1 IS THE ERROR FLAG
+
+END;
+/
+
+
+
+
+-------------------- Calling this from a trigger
+
+CREATE OR REPLACE TRIGGER TRG_GEN_FOOD_ID
+BEFORE INSERT ON FOOD
+FOR EACH ROW
+BEGIN
+
+:NEW.ID := get_FOOD_id(:NEW.PURCHASE_DATE);
+
+END;
+/
+
+

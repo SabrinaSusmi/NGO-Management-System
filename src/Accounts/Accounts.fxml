@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXTextField?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane layoutX="-1.0" layoutY="-1.0" maxWidth="1.7976931348623157E308" style="-fx-background-color: #ffe4e1;" styleClass="supply-button" stylesheets="@../theme.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Accounts.AccountsController">
+    <children>
+        <Pane fx:id="AccountsPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="1275.0" prefWidth="1473.0" style="-fx-background-color: #ffe4e1;">
+            <children>
+                <AnchorPane layoutX="-1.0" layoutY="-1.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="44.0" prefWidth="1800.0" style="-fx-background-color: #212121;">
+                    <children>
+                        <Label layoutX="62.0" layoutY="22.0" prefHeight="67.0" prefWidth="290.0" text="Account Details" textFill="WHITE">
+                            <font>
+                                <Font name="Californian FB Bold" size="36.0" />
+                            </font>
+                        </Label>
+                    </children>
+                </AnchorPane>
+                <Line endX="570.0" endY="8.0" layoutX="749.0" layoutY="455.0" startX="-570.0" startY="8.0" />
+                <Label graphicTextGap="22.0" layoutX="290.0" layoutY="156.0" prefHeight="22.0" prefWidth="172.0" text="Total Employees ">
+                    <font>
+                        <Font name="Californian FB" size="18.0" />
+                    </font>
+                </Label>
+                <JFXTextField fx:id="totalEmpTextField" alignment="CENTER" editable="false" layoutX="245.0" layoutY="188.0" style="-fx-background-color: #ffffff;">
+                    <effect>
+                        <DropShadow radius="4.75" width="0.0" />
+                    </effect></JFXTextField>
+                <Label layoutX="1022.0" layoutY="156.0" text="Total Doctors ">
+                    <font>
+                        <Font name="Californian FB" size="18.0" />
+                    </font>
+                </Label>
+                <JFXTextField fx:id="totalDocTextField" alignment="CENTER" editable="false" layoutX="983.0" layoutY="188.0" style="-fx-background-color: #ffffff;">
+                    <effect>
+                        <DropShadow radius="4.75" width="0.0" />
+                    </effect></JFXTextField>
+                <FontAwesomeIconView glyphName="USERS" layoutX="253.0" layoutY="172.0" size="25" />
+                <FontAwesomeIconView glyphName="USER_MD" layoutX="991.0" layoutY="172.0" size="25" />
+                <ImageView fitHeight="173.0" fitWidth="186.0" layoutX="376.0" layoutY="547.0" onMouseClicked="#handleAccountsDesig" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../images/ic_designation.png" />
+                    </image>
+                </ImageView>
+                <ImageView fitHeight="173.0" fitWidth="186.0" layoutX="828.0" layoutY="551.0" onMouseClicked="#handleAccountsExpenses" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../images/ic_expense.png" />
+                    </image>
+                </ImageView>
+                <ImageView fitHeight="173.0" fitWidth="186.0" layoutX="605.0" layoutY="242.0" onMouseClicked="#handleAccountsSummary" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../images/ic_summary.png" />
+                    </image>
+                </ImageView>
+            <Label layoutX="629.0" layoutY="424.0" text="Summary">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="408.0" layoutY="740.0" text="Designation">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="867.0" layoutY="741.0" text="Expenses">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            </children>
+        </Pane>
+    </children>
+</AnchorPane>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXDatePicker?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.effect.InnerShadow?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane style="-fx-background-color: #ffffff;" styleClass="supply-button" stylesheets="@../../theme.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="EventDetails.CreateEvent.CreateEventController">
+    <children>
+        <Pane fx:id="createEventPane" prefHeight="1275.0" prefWidth="1473.0" style="-fx-background-color: #ffe4e1;">
+            <children>
+                <Label layoutX="127.0" layoutY="14.0" prefHeight="98.0" prefWidth="511.0" text="Events Scheduling">
+                    <font>
+                        <Font name="Californian FB Bold" size="36.0" />
+                    </font>
+                </Label>
+                <FontAwesomeIconView glyphName="ARROW_LEFT" layoutX="35.0" layoutY="65.0" onMouseClicked="#handleBackBtn" size="28.0" styleClass="glyph-icon-back" wrappingWidth="30.755958557128906" />
+                <AnchorPane layoutX="375.0" layoutY="179.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="803.0" style="-fx-background-color: #212121;">
+                    <children>
+                        <Button graphicTextGap="22.0" layoutX="359.0" layoutY="523.0" mnemonicParsing="false" onAction="#handleConfirmBtn" onMouseClicked="#handleConfirmBtn" style="-fx-background-color: FDAB9F;" stylesheets="@../../theme.css" text="Confirm">
+                            <font>
+                                <Font name="Californian FB" size="18.0" />
+                            </font>
+                     <effect>
+                        <InnerShadow />
+                     </effect>
+                        </Button>
+                        <JFXTextField fx:id="eventName" layoutX="216.0" layoutY="209.0" prefHeight="31.0" prefWidth="435.0" promptText="Enter Events Name" stylesheets="@../../theme.css" />
+                        <JFXTextField fx:id="estimatedBudget" layoutX="216.0" layoutY="299.0" prefHeight="31.0" prefWidth="435.0" promptText="Estimated budget (Bdt)" stylesheets="@../../theme.css" />
+                        <JFXDatePicker fx:id="eventDate" defaultColor="#f3e4e4" layoutX="216.0" layoutY="403.0" prefHeight="31.0" prefWidth="435.0" promptText="Date of the event" stylesheets="@../../theme.css" />
+                        <FontAwesomeIconView glyphName="CALENDAR_ALT" layoutX="154.0" layoutY="239.0" size="25" />
+                        <FontAwesomeIconView glyphName="MONEY" layoutX="153.0" layoutY="327.0" size="25" />
+                        <FontAwesomeIconView glyphName="CALENDAR" layoutX="153.0" layoutY="431.0" size="25" />
+                        <FontAwesomeIconView glyphName="STICKY_NOTE_ALT" layoutX="154.0" layoutY="144.0" size="25" />
+                        <JFXComboBox fx:id="eventType" editable="true" labelFloat="true" layoutX="216.0" layoutY="114.0" onAction="#handleEventType" prefHeight="31.0" prefWidth="435.0" promptText="Choose type of event" />
+                    </children>
+               <effect>
+                  <DropShadow color="#f88989" offsetY="3.0" radius="22.5" spread="0.17" width="71.0" />
+               </effect>
+                </AnchorPane>
+            </children>
+        </Pane>
+    </children>
+</AnchorPane>

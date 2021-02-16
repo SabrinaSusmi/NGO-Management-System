@@ -1,0 +1,131 @@
+-----------------------import from txt file
+create or replace directory dir as 'E:\csv';
+
+--------------------------------------------------------import file for employee add
+set serveroutput on;
+create or replace procedure add_employee(filename varchar2)
+is
+F UTL_FILE.FILE_TYPE;
+V_LINE VARCHAR2 (10000);
+pname VARCHAR2 (100);
+ppass VARCHAR2 (200);
+pemail VARCHAR2 (100);
+pdob date;
+pgender VARCHAR2 (100);
+paddress VARCHAR2 (100);
+pphone VARCHAR2 (16);
+begin
+
+F := UTL_FILE.FOPEN ('DIR', filename, 'R');
+IF UTL_FILE.IS_OPEN(F) THEN
+      LOOP
+        BEGIN
+          UTL_FILE.GET_LINE(F, V_LINE, 10000);
+          IF V_LINE IS NULL THEN
+            EXIT;
+          END IF;
+pname:=REGEXP_SUBSTR(V_LINE, '[^,]+', 1, 1);
+ppass:=REGEXP_SUBSTR(V_LINE, '[^,]+', 1, 2);
+pemail:=REGEXP_SUBSTR(V_LINE, '[^,]+', 1, 3);
+pdob:=to_date(REGEXP_SUBSTR(V_LINE, '[^,]+', 1, 4),'DD/MM/YYYY');
+pgender:=REGEXP_SUBSTR(V_LINE, '[^,]+', 1, 5);
+paddress:=REGEXP_SUBSTR(V_LINE, '[^,]+', 1, 6);
+pphone:=REGEXP_SUBSTR(V_LINE, '[^,]+', 1, 7);
+
+
+insert into employee(name,password,email,dob,gender,address,phone)
+        values(pname,ppass,pemail,pdob,pgender,paddress,pphone);
+commit;
+exception
+when no_data_found then exit;
+end;
+end loop;
+END IF;
+    UTL_FILE.FCLOSE(F);
+end;
+/
+
+--------------------------------------------------------------------import file for donor add
+set serveroutput on;
+create or replace procedure add_donor(filename varchar2)
+is
+F UTL_FILE.FILE_TYPE;
+V_LINE VARCHAR2 (10000);
+pname VARCHAR2 (100);
+pemail VARCHAR2 (100);
+pgender VARCHAR2 (100);
+paddress VARCHAR2 (100);
+pphone VARCHAR2(16);
+poccupation varchar2(100);
+begin
+
+F := UTL_FILE.FOPEN ('DIR', filename, 'R');
+IF UTL_FILE.IS_OPEN(F) THEN
+      LOOP
+        BEGIN
+          UTL_FILE.GET_LINE(F, V_LINE, 10000);
+          IF V_LINE IS NULL THEN
+            EXIT;
+          END IF;
+pname:=REGEXP_SUBSTR(V_LINE, '[^,]+', 1, 1);
+pemail:=REGEXP_SUBSTR(V_LINE, '[^,]+', 1, 2);
+pgender:=REGEXP_SUBSTR(V_LINE, '[^,]+', 1, 3);
+paddress:=REGEXP_SUBSTR(V_LINE, '[^,]+', 1, 4);
+pphone:=REGEXP_SUBSTR(V_LINE, '[^,]+', 1, 5);
+poccupation:=REGEXP_SUBSTR(V_LINE, '[^,]+', 1, 6);
+
+
+insert into donor(name,email,gender,address,phone,occupation)
+        values(pname,pemail,pgender,paddress,pphone,poccupation);
+commit;
+exception
+when no_data_found then exit;
+end;
+end loop;
+END IF;
+    UTL_FILE.FCLOSE(F);
+end;
+/
+
+
+----------------import file for volunteer add
+set serveroutput on;
+create or replace procedure add_volunteer(filename varchar2)
+is
+F UTL_FILE.FILE_TYPE;
+V_LINE VARCHAR2 (10000);
+pname VARCHAR2 (100);
+pemail VARCHAR2 (100);
+pgender VARCHAR2 (100);
+paddress VARCHAR2 (100);
+pphone VARCHAR2(16);
+poccupation varchar2(100);
+begin
+
+F := UTL_FILE.FOPEN ('DIR', filename, 'R');
+IF UTL_FILE.IS_OPEN(F) THEN
+      LOOP
+        BEGIN
+          UTL_FILE.GET_LINE(F, V_LINE, 10000);
+          IF V_LINE IS NULL THEN
+            EXIT;
+          END IF;
+pname:=REGEXP_SUBSTR(V_LINE, '[^,]+', 1, 1);
+pemail:=REGEXP_SUBSTR(V_LINE, '[^,]+', 1, 2);
+pgender:=REGEXP_SUBSTR(V_LINE, '[^,]+', 1, 3);
+paddress:=REGEXP_SUBSTR(V_LINE, '[^,]+', 1, 4);
+pphone:=REGEXP_SUBSTR(V_LINE, '[^,]+', 1, 5);
+poccupation:=REGEXP_SUBSTR(V_LINE, '[^,]+', 1, 6);
+
+
+insert into volunteer(name,email,gender,address,phone,occupation)
+        values(pname,pemail,pgender,paddress,pphone,poccupation);
+commit;
+exception
+when no_data_found then exit;
+end;
+end loop;
+END IF;
+    UTL_FILE.FCLOSE(F);
+end;
+/

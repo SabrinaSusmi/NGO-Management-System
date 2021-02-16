@@ -1,0 +1,36 @@
+----check email,phone validation
+create or replace function check_validation(email_f varchar2,phone_f varchar2)
+return varchar2
+is
+email_isValid boolean;
+phone_isValid boolean;
+begin
+email_isvalid :=
+      REGEXP_LIKE (email_f,'^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$');
+phone_isValid:= REGEXP_LIKE (phone_f,'^[+]+[8]{2}+[0]+[1]+[0-9]{9}|[8]{2}+[0]+[1]+[0-9]{9}|[0]+[1]+[0-9]{9}$');
+
+IF (email_isvalid and phone_isValid)
+     then  return 'TRUE';
+else return 'False';
+end if;
+
+end;
+/
+
+
+----check password validation
+create or replace function check_password(pass_f varchar2)
+return varchar2
+is
+pass_isValid boolean;
+
+begin
+pass_isValid := REGEXP_LIKE(pass_f, '^.*[0-9]')  AND REGEXP_LIKE(pass_f, '^[a-zA-Z0-9][a-zA-Z0-9 ._%+-]{7,}$');
+
+IF pass_isValid
+     then  return 'TRUE';
+else return 'False';
+end if;
+
+end;
+/

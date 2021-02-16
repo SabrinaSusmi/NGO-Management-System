@@ -1,0 +1,55 @@
+--------------------------------------------------------------------------Donation History
+drop table donation_history;
+create table donation_history(
+id varchar2(20) primary key,
+don_date date ,
+amount number,
+donor_id varchar2(15),
+constraint don_history_fk foreign key (donor_id) references donor(donor_id)
+);
+
+
+
+---------------------- generate donation_id
+set serveroutput on;
+CREATE OR REPLACE FUNCTION GET_donation_id
+RETURN varchar2
+IS
+d_ID varchar2(20);
+id number;
+
+
+BEGIN
+SELECT  max(ID) INTO d_ID FROM donation_history;
+
+IF d_ID IS NULL --- Does not exist
+THEN
+	id := 101;
+
+ELSE
+select max(substr(id,3)) into id from donation_history ;
+
+	id := id+1;
+
+END IF;
+
+RETURN NVL(('DT'||id),-1); --- -1 IS THE ERROR FLAG
+
+END;
+/
+
+
+
+
+
+---------------- Calling this from a trigger
+
+CREATE OR REPLACE TRIGGER TRG_GEN_donation_ID
+BEFORE INSERT ON donation_history
+FOR EACH ROW
+BEGIN
+
+:NEW.ID := get_donation_id();
+
+END;
+/

@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ContextMenu?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.effect.InnerShadow?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="VolunteerAncPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: #ffe4e1;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Person.VolunteerDetails.VolunteerDetailsController">
+    <children>
+        <Pane fx:id="VolunteerDetailsPane" prefHeight="1275.0" prefWidth="1473.0">
+            <children>
+                <AnchorPane layoutX="-1.0" layoutY="-1.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="44.0" prefWidth="1800.0" style="-fx-background-color: #212121;">
+                    <children>
+                        <Label layoutX="62.0" layoutY="22.0" prefHeight="67.0" prefWidth="290.0" text="Volunteer Details" textFill="WHITE">
+                            <font>
+                                <Font name="Californian FB Bold" size="36.0" />
+                            </font>
+                        </Label>
+                    </children>
+                </AnchorPane>
+                <HBox alignment="CENTER" layoutY="169.0" prefHeight="98.0" prefWidth="1426.0">
+                    <padding>
+                        <Insets left="100.0" />
+                    </padding>
+                    <children>
+                        <Button fx:id="addNewVolBtn" alignment="BASELINE_CENTER" graphicTextGap="22.0" mnemonicParsing="false" onMouseClicked="#handleAddNew" prefHeight="55.0" prefWidth="330.0" style="-fx-background-color: FDAB9F;" text="Add New Volunteer">
+                            <font>
+                                <Font name="Californian FB" size="25.0" />
+                            </font>
+                     <effect>
+                        <InnerShadow />
+                     </effect>
+                        </Button>
+                        <Button fx:id="updateButton" alignment="BASELINE_CENTER" graphicTextGap="22.0" mnemonicParsing="false" onMouseClicked="#handleUpdate" prefHeight="55.0" prefWidth="330.0" style="-fx-background-color: FDAB9F;" text="Update Information">
+                            <font>
+                                <Font name="Californian FB" size="25.0" />
+                            </font>
+                            <HBox.margin>
+                                <Insets left="100.0" />
+                            </HBox.margin>
+                     <effect>
+                        <InnerShadow />
+                     </effect>
+                        </Button>
+                    </children>
+                </HBox>
+                <ScrollPane layoutX="100.0" layoutY="377.0" prefHeight="500.0" prefWidth="1200.0">
+                    <content>
+                        <TableView fx:id="VolunteerTable" prefHeight="500.0" prefWidth="1200.0">
+                            <columns>
+                                <TableColumn fx:id="colVolunteerID" editable="false" maxWidth="300.0" minWidth="225.99996948242188" prefWidth="294.0" text="Volunteer ID" />
+                                <TableColumn fx:id="colVolunteerName" editable="false" minWidth="240.0" prefWidth="305.0" text="Name" />
+                                <TableColumn fx:id="colVolunteerPhone" editable="false" maxWidth="309.0" minWidth="-Infinity" prefWidth="309.0" text="Phone No" />
+                                <TableColumn fx:id="colVolunteerEmail" editable="false" maxWidth="300.0" minWidth="-Infinity" prefWidth="270.0" text="Email" />
+                            </columns>
+                            <contextMenu>
+                                <ContextMenu>
+                                    <items>
+                                        <MenuItem mnemonicParsing="false" onAction="#handleRemoveVolunteerOption" text="Remove" />
+                                    </items>
+                                </ContextMenu>
+                            </contextMenu>
+                        </TableView>
+                    </content>
+                </ScrollPane>
+                <JFXTextField fx:id="searchVolunteerTextField" focusColor="#900f0f" labelFloat="true" layoutX="100.0" layoutY="312.0" prefHeight="31.0" prefWidth="265.0" promptText="Search" unFocusColor="#900f0f">
+                    <font>
+                        <Font size="18.0" />
+                    </font>
+                </JFXTextField>
+            </children>
+        </Pane>
+    </children>
+
+</AnchorPane>

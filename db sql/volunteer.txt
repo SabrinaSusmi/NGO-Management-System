@@ -1,0 +1,66 @@
+------------------------------------------volunteer
+drop table volunteer;
+CREATE TABLE volunteer(
+volunteer_ID varchar2(15) PRIMARY KEY,
+name varchar2(100) not null,
+email varchar2(50) not null,
+gender varchar2(10) not null,
+address varchar2(200) ,
+phone varchar2(20) not null,
+occupation varchar2(50),
+constraint volunteer_gender check (gender in ('Male','Female','Others')),
+CONSTRAINT email_unique_volunteer UNIQUE (email),
+CONSTRAINT phone_unique_volunteer UNIQUE (phone)
+);
+
+
+
+--------------------- generate volunteer_id
+set serveroutput on;
+CREATE OR REPLACE FUNCTION GET_volunteer_id
+RETURN varchar2
+IS
+d_ID varchar2(15);
+yr number;
+id number;
+mn number;
+dd varchar2(10);
+
+BEGIN
+SELECT  max(volunteer_ID) INTO d_ID FROM volunteer;
+
+dbms_output.put_line(d_id);
+
+select substr(to_char(sysdate,'YYYYMMDD'),3,4) into dd from dual;
+
+IF d_ID IS NULL --- Does not exist
+THEN
+	id := to_number(dd || '1001');
+	
+ELSE
+select max(substr(volunteer_id,-4)) into mn from volunteer ;
+mn:=mn+1;
+	id := to_number(dd||mn);
+	
+END IF;
+
+RETURN NVL(('Vol'||id),-1); --- -1 IS THE ERROR FLAG
+
+END;
+/
+
+
+
+
+---------------------------------- Calling this from a trigger
+
+CREATE OR REPLACE TRIGGER TRG_GEN_volunteer_ID
+BEFORE INSERT ON volunteer
+FOR EACH ROW
+BEGIN
+
+:NEW.volunteer_ID := get_volunteer_id();
+
+END;
+/
+

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ContextMenu?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.effect.InnerShadow?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="SupplyDetails.Emergency.EmergencySupplyController">
+    <children>
+        <Pane fx:id="EmergencySupplyDetailsPane" layoutX="1.0" prefHeight="1275.0" prefWidth="1473.0" style="-fx-background-color: #ffe4e1;" stylesheets="@../../theme.css">
+            <children>
+                <ScrollPane layoutX="100.0" layoutY="377.0" prefHeight="500.0" prefWidth="1200.0">
+                    <content>
+                        <TableView fx:id="emergencySupplyTable" prefHeight="500.0" prefWidth="1200.0">
+                            <columns>
+                                <TableColumn fx:id="colName" editable="false" minWidth="240.0" prefWidth="439.0" text="Name" />
+                                <TableColumn fx:id="colQuantity" editable="false" maxWidth="1000.0" minWidth="-Infinity" prefWidth="377.0" text="Quantity" />
+                                <TableColumn fx:id="colPrice" editable="false" maxWidth="1000.0" minWidth="-Infinity" prefWidth="363.0" text="Total Cost (Bdt)" />
+                            </columns>
+                            <contextMenu>
+                                <ContextMenu>
+                                    <items>
+                                        <MenuItem mnemonicParsing="false" onAction="#handleDeleteOption" text="Remove" />
+                                    </items>
+                                </ContextMenu>
+                            </contextMenu>
+                        </TableView>
+                    </content>
+                </ScrollPane>
+                <TextField fx:id="searchSupplyTextField" layoutX="832.0" layoutY="201.0" prefHeight="55.0" prefWidth="308.0" promptText="Search">
+                    <font>
+                        <Font size="25.0" />
+                    </font>
+               <effect>
+                  <DropShadow offsetY="0.17" radius="4.75" width="0.0" />
+               </effect></TextField>
+                <Label fx:id="searchVaccineLabel" alignment="CENTER" layoutX="689.0" layoutY="201.0" prefHeight="55.0" prefWidth="122.0" text=" Search" textAlignment="CENTER">
+                    <font>
+                        <Font name="Californian FB" size="30.0" />
+                    </font>
+                </Label>
+                <Button graphicTextGap="22.0" layoutX="222.0" layoutY="201.0" mnemonicParsing="false" onAction="#handleAddOption" prefHeight="55.0" prefWidth="330.0" style="-fx-background-color: FDAB9F;" text="Add New Supply">
+                    <font>
+                        <Font name="Californian FB" size="24.0" />
+                    </font>
+               <effect>
+                  <InnerShadow />
+               </effect>
+                </Button>
+                <AnchorPane layoutX="-1.0" layoutY="-1.0" prefHeight="62.0" prefWidth="1482.0" style="-fx-background-color: #ffe4e1;">
+                    <children>
+                        <Label layoutX="153.0" layoutY="22.0" prefHeight="67.0" prefWidth="425.0" text="Emergency Supply Details">
+                            <font>
+                                <Font name="Californian FB Bold" size="36.0" />
+                            </font>
+                        </Label>
+                        <FontAwesomeIconView glyphName="ARROW_LEFT" layoutX="76.0" layoutY="66.0" onMouseClicked="#handleBackButton" size="28.0" styleClass="glyph-icon-back" wrappingWidth="30.755958557128906" />
+                    </children>
+                </AnchorPane>
+            </children>
+        </Pane>
+    </children>
+
+</AnchorPane>

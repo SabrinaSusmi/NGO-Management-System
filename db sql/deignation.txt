@@ -1,0 +1,112 @@
+--------------designation------
+drop table designation;
+create table designation(
+id varchar2(10) primary key,
+designation_name varchar2(100),
+type varchar2(15) not null,
+amount number,
+constraint desig_type check (type in ('Doctor','Employee'))
+);
+
+
+
+---- generate designation_id
+set serveroutput on;
+CREATE OR REPLACE FUNCTION GET_designation_id(dtype varchar2)
+RETURN varchar2
+IS
+d_ID varchar2(10);
+tp varchar2(2);
+id number;
+aa number;
+BEGIN
+SELECT  max(ID) INTO d_ID FROM designation;
+
+dbms_output.put_line(d_id);
+if dtype='Doctor' then tp:='D';
+else tp:='E';
+end if;
+
+IF d_ID IS NULL --- Does not exist
+THEN
+	id := 1001;
+	
+ELSE
+select max(substr(id,2)) into id from designation ;
+
+	id := id + 1;
+	
+END IF;
+
+RETURN NVL((tp||id),-1); --- -1 IS THE ERROR FLAG
+
+END;
+/
+
+--- Calling this from a trigger
+
+CREATE OR REPLACE TRIGGER TRG_GEN_desig_ID
+BEFORE INSERT ON designation
+FOR EACH ROW
+BEGIN
+
+:NEW.ID := get_designation_id(:NEW.type);
+
+END;
+/
+
+
+
+-----------------------------------get designation for reg
+create or replace function get_designation(idf number)
+return varchar2
+is
+desig varchar2(100);
+des varchar2(100);
+pos varchar2(100);
+begin
+select designation into pos from employee where emp_id=idf;
+if pos is null then desig:='N/A'; 
+else select designation_name into desig from designation,employee where employee.designation=designation.id and emp_id=idf;
+
+end if;
+return desig;
+end;
+/
+
+
+---------------------show Doctor salary
+create or replace function show_Doctor_Salary(doc_id varchar2)
+return number
+is 
+salary number;
+begin
+select amount into salary from doctor,designation where speciality=id and doctor_id=doc_id;
+return salary;
+end;
+/
+
+---------show employee salary
+create or replace function show_employee_Salary(e_id varchar2)
+return number
+is 
+salary number;
+begin
+select amount into salary from employee,designation where designation=id and emp_id=e_id;
+
+return salary;
+end;
+/
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ContextMenu?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.effect.InnerShadow?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="employeeDetailsAnchorPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: #ffe4e1;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Person.EmployeeDet.EmployeeDetailsController">
+   <children>
+      <Pane fx:id="employeeDetailsPane" prefHeight="1275.0" prefWidth="1473.0" stylesheets="@../../theme.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <AnchorPane layoutX="-1.0" layoutY="-1.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="44.0" prefWidth="1800.0" style="-fx-background-color: #212121;">
+               <children>
+                  <Label layoutX="62.0" layoutY="22.0" prefHeight="67.0" prefWidth="290.0" text="Employee Details" textFill="WHITE">
+                     <font>
+                        <Font name="Californian FB Bold" size="36.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+            <HBox alignment="CENTER" layoutY="169.0" prefHeight="98.0" prefWidth="1426.0">
+               <padding>
+                  <Insets left="100.0" />
+               </padding>
+               <children>
+                  <Button fx:id="addButton" alignment="BASELINE_CENTER" graphicTextGap="22.0" mnemonicParsing="false" onAction="#handleAddNew" prefHeight="55.0" prefWidth="330.0" style="-fx-background-color: FDAB9F;" text="Add New Employee">
+                     <font>
+                        <Font name="Californian FB" size="25.0" />
+                     </font>
+                     <effect>
+                        <InnerShadow />
+                     </effect>
+                  </Button>
+                  <Button fx:id="updateButton" alignment="BASELINE_CENTER" graphicTextGap="22.0" mnemonicParsing="false" onMouseClicked="#handleUpdate" prefHeight="55.0" prefWidth="330.0" style="-fx-background-color: FDAB9F;" text="Update Information">
+                     <font>
+                        <Font name="Californian FB" size="25.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="100.0" />
+                     </HBox.margin>
+                     <effect>
+                        <InnerShadow />
+                     </effect>
+                  </Button>
+               </children>
+            </HBox>
+            <ScrollPane layoutX="100.0" layoutY="377.0" prefHeight="507.0" prefWidth="1203.0">
+               <content>
+                  <TableView fx:id="employeeTable" prefHeight="505.0" prefWidth="1200.0">
+                     <columns>
+                        <TableColumn fx:id="colEmpID" editable="false" maxWidth="300.0" minWidth="225.99996948242188" prefWidth="225.99996948242188" text="Employee ID" />
+                        <TableColumn fx:id="colEmpName" editable="false" minWidth="240.0" prefWidth="240.0" text="Name" />
+                        <TableColumn fx:id="colEmpPhone" editable="false" maxWidth="300.0" minWidth="-Infinity" prefWidth="231.0" text="Phone No" />
+                        <TableColumn fx:id="colEmpEmail" editable="false" maxWidth="300.0" minWidth="-Infinity" prefWidth="243.0" text="Email" />
+                        <TableColumn fx:id="colEmpDesignation" editable="false" maxWidth="310.0" minWidth="-Infinity" prefWidth="259.0" text="Designation" />
+                     </columns>
+                     <contextMenu>
+                        <ContextMenu>
+                           <items>
+                              <MenuItem mnemonicParsing="false" onAction="#handleEmployeeRemoveOption" text="Remove Employee" />
+                           </items>
+                        </ContextMenu>
+                     </contextMenu>
+                  </TableView>
+               </content>
+            </ScrollPane>
+            <JFXTextField fx:id="searchEmployeeTextField" focusColor="#900f0f" labelFloat="true" layoutX="100.0" layoutY="299.0" prefHeight="31.0" prefWidth="265.0" promptText="Search">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </JFXTextField>
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>

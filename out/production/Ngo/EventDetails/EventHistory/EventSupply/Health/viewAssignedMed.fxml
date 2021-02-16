@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="viewDetails" prefHeight="543.0" prefWidth="813.0" stylesheets="@../../../../theme.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="EventDetails.EventHistory.EventSupply.Health.ViewAssignedMedController">
+    <children>
+        <TableView fx:id="informationTable" layoutY="56.0" prefHeight="431.0" prefWidth="813.0">
+            <columns>
+                <TableColumn fx:id="colName" prefWidth="151.0" text="NAME" />
+                <TableColumn fx:id="colQuantity" prefWidth="149.0" text="QUANTITY" />
+                <TableColumn fx:id="colPrice" prefWidth="132.0" text="PRICE (Bdt)" />
+                <TableColumn fx:id="colExpDate" prefWidth="162.0" text="EXP DATE" />
+                <TableColumn fx:id="colManufacturer" prefWidth="216.0" text="MANUFACTURER" />
+            </columns>
+        </TableView>
+        <Button graphicTextGap="22.0" layoutX="741.0" layoutY="498.0" mnemonicParsing="false" onAction="#handleBackButton" style="-fx-background-color: FDAB9F;" text="BACK">
+            <font>
+                <Font name="Californian FB" size="18.0" />
+            </font>
+        </Button>
+    </children>
+
+</AnchorPane>

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXDatePicker?>
+<?import com.jfoenix.controls.JFXPasswordField?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.effect.InnerShadow?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="AddEmployeePane" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1350.0" stylesheets="@../../../theme.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Person.EmployeeDet.AddEmployee.AddEmployeeController">
+    <children>
+        <AnchorPane layoutX="375.0" layoutY="111.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="741.0" prefWidth="690.0" style="-fx-background-color: #212121;">
+            <children>
+                <Button fx:id="confirmUpdateBtn" graphicTextGap="22.0" layoutX="300.0" layoutY="622.0" mnemonicParsing="false" onMouseClicked="#handleConfirmButton" opacity="0.82" prefHeight="42.0" prefWidth="135.0" style="-fx-background-color: FDAB9F;" text="Confirm">
+                    <font>
+                        <Font name="Californian FB" size="18.0" />
+                    </font>
+               <effect>
+                  <InnerShadow />
+               </effect>
+                </Button>
+            <JFXTextField fx:id="employeeName" labelFloat="true" layoutX="182.0" layoutY="59.0" prefHeight="44.0" prefWidth="434.0" promptText="Name" />
+            <JFXTextField fx:id="employeeEmailID" labelFloat="true" layoutX="182.0" layoutY="125.0" prefHeight="44.0" prefWidth="434.0" promptText="Email ID" />
+            <FontAwesomeIconView glyphName="USER_CIRCLE_ALT" layoutX="131.0" layoutY="92.0" size="25" />
+            <FontAwesomeIconView glyphName="ENVELOPE_ALT" layoutX="130.0" layoutY="156.0" size="25" />
+            <JFXPasswordField fx:id="employeePassword" labelFloat="true" layoutX="182.0" layoutY="190.0" prefHeight="39.0" prefWidth="434.0" promptText="Password" />
+            <JFXTextField fx:id="employeePhoneNumber" labelFloat="true" layoutX="182.0" layoutY="254.0" prefHeight="44.0" prefWidth="434.0" promptText="Contact No." />
+            <JFXComboBox fx:id="employeeGender" editable="true" labelFloat="true" layoutX="182.0" layoutY="327.0" prefHeight="31.0" prefWidth="434.0" promptText="Gender" styleClass="input" />
+            <JFXDatePicker fx:id="employeeDOB" defaultColor="#f3e4e4" layoutX="182.0" layoutY="391.0" prefHeight="39.0" prefWidth="434.0" promptText="Date of Birth" styleClass="date" />
+            <FontAwesomeIconView glyphName="PHONE" layoutX="135.0" layoutY="284.0" size="25" />
+            <FontAwesomeIconView glyphName="TRANSGENDER" layoutX="134.0" layoutY="355.0" size="25" />
+            <FontAwesomeIconView glyphName="CALENDAR" layoutX="135.0" layoutY="419.0" size="25" />
+            <JFXComboBox fx:id="employeeDesignation" editable="true" labelFloat="true" layoutX="182.0" layoutY="461.0" prefHeight="31.0" prefWidth="434.0" promptText="Designation" styleClass="input" />
+            <JFXTextField fx:id="employeeAddress" labelFloat="true" layoutX="180.0" layoutY="525.0" prefHeight="44.0" prefWidth="434.0" promptText="Address" />
+            <FontAwesomeIconView glyphName="ADDRESS_BOOK_ALT" layoutX="133.0" layoutY="555.0" size="25" />
+            <FontAwesomeIconView glyphName="KEY" layoutX="132.0" layoutY="218.0" size="25" />
+            <FontAwesomeIconView glyphName="BRIEFCASE" layoutX="132.0" layoutY="489.0" size="25" />
+            <Button graphicTextGap="22.0" layoutX="109.0" layoutY="622.0" mnemonicParsing="false" onAction="#handleImportFileButton" opacity="0.82" prefHeight="42.0" prefWidth="135.0" style="-fx-background-color: FDAB9F;" text="Import File">
+               <font>
+                  <Font name="Californian FB" size="18.0" />
+               </font>
+               <effect>
+                  <InnerShadow />
+               </effect>
+            </Button>
+            <Button fx:id="backButton" graphicTextGap="22.0" layoutX="487.0" layoutY="622.0" mnemonicParsing="false" onAction="#handleBackButton" opacity="0.82" prefHeight="42.0" prefWidth="135.0" style="-fx-background-color: FDAB9F;" text="Back">
+               <font>
+                  <Font name="Californian FB" size="18.0" />
+               </font>
+               <effect>
+                  <InnerShadow />
+               </effect>
+            </Button>
+            </children>
+         <effect>
+            <DropShadow color="#ee8b8b" offsetY="3.0" radius="22.5" spread="0.17" width="71.0" />
+         </effect>
+        </AnchorPane>
+        <Label layoutX="375.0" layoutY="61.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="42.0" prefWidth="410.0" text="Add An Employee">
+            <font>
+                <Font name="Californian FB Bold" size="36.0" />
+            </font>
+        </Label>
+    </children>
+
+</AnchorPane>

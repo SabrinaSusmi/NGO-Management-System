@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import java.lang.String?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.InnerShadow?>
+<?import javafx.scene.effect.Reflection?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane style="-fx-background-color: #ffe0e3;" styleClass="supply-button" stylesheets="@../../theme.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Accounts.Summary.SummaryController">
+    <children>
+        <Pane fx:id="SummaryPane" prefHeight="1275.0" prefWidth="1473.0" style="-fx-background-color: ffe4e1;">
+            <children>
+                <Label layoutX="181.0" layoutY="14.0" prefHeight="98.0" prefWidth="511.0" text="Summary ~ Report">
+                    <font>
+                        <Font name="Californian FB Bold" size="36.0" />
+                    </font>
+                </Label>
+            <JFXButton buttonType="RAISED" graphicTextGap="22.0" layoutX="124.0" layoutY="155.0" onAction="#handlesalaryChart" onMouseClicked="#handlesalaryChart" prefHeight="61.0" prefWidth="232.0" stylesheets="@../../theme.css" text="Salary Expense">
+               <effect>
+                  <InnerShadow choke="0.1" />
+               </effect>
+               <ripplerFill>
+                  <LinearGradient endX="1.0" startX="1.0" startY="0.4271844660194174">
+                     <stops>
+                        <Stop color="#f78b94" />
+                        <Stop color="WHITE" offset="1.0" />
+                     </stops>
+                  </LinearGradient>
+               </ripplerFill></JFXButton>
+            <JFXButton buttonType="RAISED" graphicTextGap="22.0" layoutX="733.0" layoutY="155.0" onAction="#handleExpensesChart" onMouseClicked="#handleExpensesChart" prefHeight="61.0" prefWidth="232.0" stylesheets="@../../theme.css" text="Expenses Summary">
+               <effect>
+                  <InnerShadow choke="0.1" />
+               </effect></JFXButton>
+                <JFXButton buttonType="RAISED" graphicTextGap="22.0" layoutX="427.0" layoutY="155.0" onAction="#handleDonationSummary" onMouseClicked="#handleDonationSummary" prefHeight="61.0" prefWidth="232.0" stylesheets="@../../theme.css" text="Donation History">
+               <effect>
+                  <InnerShadow choke="0.1" />
+               </effect></JFXButton>
+            <Pane fx:id="barChartpane" layoutX="73.0" layoutY="331.0" prefHeight="554.0" prefWidth="1328.0">
+               <children>
+                  <Label layoutX="500.0" layoutY="19.0" text="For Month" />
+                  <Label layoutX="626.0" layoutY="19.0" text="and Year" />
+                  <FontAwesomeIconView glyphName="SEARCH" layoutX="466.0" layoutY="35.0" />
+                  <Line endX="227.0" layoutX="562.0" layoutY="45.0" startX="-100.0" />
+                  <TextField fx:id="monthNumber" alignment="CENTER" layoutX="575.0" layoutY="14.0" prefHeight="39.0" prefWidth="48.0" stylesheets="@../../theme.css">
+                     <styleClass>
+                        <String fx:value="summary-text-field" />
+                        <String fx:value="second-text-field" />
+                     </styleClass>
+                  </TextField>
+                  <TextField fx:id="yearNumber" alignment="CENTER" layoutX="692.0" layoutY="14.0" onAction="#handleSummary" prefHeight="31.0" prefWidth="90.0" stylesheets="@../../theme.css">
+                     <styleClass>
+                        <String fx:value="summary-text-field" />
+                        <String fx:value="second-text-field" />
+                     </styleClass>
+                  </TextField>
+                  <JFXTextField fx:id="netTotal" editable="false" layoutX="674.0" layoutY="395.0" prefHeight="31.0" prefWidth="166.0" style="-fx-background-color: #ffffff;" stylesheets="@../../theme.css">
+                     <styleClass>
+                        <String fx:value="summary-text-field" />
+                        <String fx:value="second-text-field" />
+                     </styleClass>
+                     <effect>
+                        <Reflection fraction="0.3" />
+                     </effect>
+                  </JFXTextField>
+                  <Label graphicTextGap="22.0" layoutX="354.0" layoutY="400.0" prefHeight="28.0" prefWidth="277.0" text="Remaining balance (Bdt) :">
+                     <font>
+                        <Font name="Californian FB Bold" size="24.0" />
+                     </font>
+                  </Label>
+                  <JFXTextField fx:id="totalDonation" editable="false" layoutX="337.0" layoutY="115.0" prefHeight="31.0" prefWidth="166.0" style="-fx-background-color: #ffffff;" stylesheets="@../../theme.css">
+                     <styleClass>
+                        <String fx:value="summary-text-field" />
+                        <String fx:value="second-text-field" />
+                     </styleClass>
+                     <effect>
+                        <Reflection fraction="0.3" />
+                     </effect>
+                  </JFXTextField>
+                  <Label graphicTextGap="22.0" layoutX="129.0" layoutY="120.0" prefHeight="27.0" prefWidth="166.0" text="Total Donation :">
+                     <font>
+                        <Font name="Californian FB" size="22.0" />
+                     </font>
+                  </Label>
+                  <JFXTextField fx:id="totalExpenses" editable="false" layoutX="949.0" layoutY="115.0" prefHeight="31.0" prefWidth="166.0" style="-fx-background-color: #ffffff;" stylesheets="@../../theme.css">
+                     <styleClass>
+                        <String fx:value="summary-text-field" />
+                        <String fx:value="second-text-field" />
+                     </styleClass>
+                     <effect>
+                        <Reflection fraction="0.3" />
+                     </effect>
+                  </JFXTextField>
+                  <Label graphicTextGap="22.0" layoutX="760.0" layoutY="120.0" prefHeight="27.0" prefWidth="158.0" text="Total Expense :">
+                     <font>
+                        <Font name="Californian FB" size="22.0" />
+                     </font>
+                  </Label>
+                  <JFXTextField fx:id="totalEventCost" editable="false" layoutX="337.0" layoutY="264.0" prefHeight="31.0" prefWidth="166.0" style="-fx-background-color: #ffffff;" stylesheets="@../../theme.css">
+                     <styleClass>
+                        <String fx:value="summary-text-field" />
+                        <String fx:value="second-text-field" />
+                     </styleClass>
+                     <effect>
+                        <Reflection fraction="0.3" />
+                     </effect>
+                  </JFXTextField>
+                  <Label graphicTextGap="22.0" layoutX="129.0" layoutY="270.0" prefHeight="27.0" prefWidth="166.0" text="Total Event Cost :">
+                     <font>
+                        <Font name="Californian FB" size="22.0" />
+                     </font>
+                  </Label>
+                  <JFXTextField fx:id="totalSupplyCost" editable="false" layoutX="950.0" layoutY="259.0" prefHeight="31.0" prefWidth="166.0" style="-fx-background-color: #ffffff;" stylesheets="@../../theme.css">
+                     <styleClass>
+                        <String fx:value="summary-text-field" />
+                        <String fx:value="second-text-field" />
+                     </styleClass>
+                     <effect>
+                        <Reflection fraction="0.3" />
+                     </effect>
+                  </JFXTextField>
+                  <Label graphicTextGap="22.0" layoutX="744.0" layoutY="266.0" prefHeight="27.0" prefWidth="174.0" text="Total Supply Cost :">
+                     <font>
+                        <Font name="Californian FB" size="22.0" />
+                     </font>
+                  </Label>
+               </children></Pane>
+            <FontAwesomeIconView fx:id="backButton" fill="#ea7979" glyphName="ARROW_LEFT" layoutX="110.0" layoutY="74.0" onMouseClicked="#handleBackButton" size="32.0" styleClass="glyph-icon-back" />
+            <JFXButton buttonType="RAISED" layoutX="1036.0" layoutY="155.0" onAction="#handleEventSummary" prefHeight="61.0" prefWidth="232.0" stylesheets="@../../theme.css" text="Event Summary">
+               <effect>
+                  <InnerShadow choke="0.1" />
+               </effect></JFXButton>
+            </children>
+        </Pane>
+    </children>
+</AnchorPane>

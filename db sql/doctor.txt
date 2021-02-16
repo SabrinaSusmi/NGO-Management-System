@@ -1,0 +1,67 @@
+
+-----------------------------------------------------------------------------------doctor
+drop table doctor;
+CREATE TABLE DOCTOR(
+DOCTOR_ID varchar2(12) PRIMARY KEY,
+name varchar2(100) not null,
+email varchar2(50) not null,
+dob date not null,
+gender varchar2(10) not null,
+address varchar2(200) not null,
+phone varchar2(20) not null,
+speciality varchar2(50) NOT NULL,
+Available_hr varchar2(20),
+QUALIFICATION VARCHAR2(100) not null,
+password varchar2(200),
+constraint doc_desig foreign key(speciality) references designation(id),
+constraint doctor_gender check (gender in ('Male','Female','Others')),
+CONSTRAINT email_unique_doctor UNIQUE (email),
+CONSTRAINT phone_unique_doctor UNIQUE (phone)
+);
+
+
+--------------------------- generate doctor_id
+set serveroutput on;
+CREATE OR REPLACE FUNCTION GET_doctor_id
+RETURN varchar2
+IS
+d_ID varchar2(12);
+yr number;
+id number;
+mn number;
+dd varchar2(12);
+BEGIN
+SELECT  max(doctor_ID) INTO d_ID FROM doctor;
+
+dbms_output.put_line(d_id);
+select substr(to_char(sysdate,'YYYYMMDD'),3,4) into dd from dual;
+
+IF d_ID IS NULL --- Does not exist
+THEN
+	id := to_number(dd || '101');
+	
+ELSE
+select max(substr(Doctor_id,-3)) into mn from doctor ;
+
+	mn:=mn+1;
+	id := to_number(dd||mn);
+	
+END IF;
+
+RETURN NVL(('D'||id),-1); --- -1 IS THE ERROR FLAG
+
+END;
+/
+
+
+-------------- Calling this from a trigger
+
+CREATE OR REPLACE TRIGGER TRG_GEN_doctor_ID
+BEFORE INSERT ON doctor
+FOR EACH ROW
+BEGIN
+
+:NEW.doctor_ID := get_doctor_id();
+
+END;
+/

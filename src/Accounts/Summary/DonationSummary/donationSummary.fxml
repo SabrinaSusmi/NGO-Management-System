@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXTextField?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.Reflection?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+<Pane fx:id="donSumPane" prefHeight="554.0" prefWidth="1328.0" style="-fx-background-color: #ffe4e1;" stylesheets="@../../../theme.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Accounts.Summary.DonationSummary.donationSummaryController">
+    <children>
+        <Label layoutX="438.0" layoutY="19.0" text="For Month" />
+        <Label layoutX="557.0" layoutY="19.0" text="and Year" />
+        <FontAwesomeIconView glyphName="SEARCH" layoutX="404.0" layoutY="35.0" />
+        <Line endX="227.0" layoutX="500.0" layoutY="45.0" startX="-100.0" />
+        <TextField fx:id="monthNumber" alignment="CENTER" layoutX="513.0" layoutY="14.0" prefHeight="31.0" prefWidth="39.0" styleClass="second-text-field" />
+        <TextField fx:id="yearNumber" alignment="CENTER" layoutX="622.0" layoutY="14.0" onAction="#IDOnEnter" prefHeight="31.0" prefWidth="90.0" styleClass="second-text-field" />
+
+        <ScrollPane layoutX="76.0" layoutY="57.0" prefHeight="424.0" prefWidth="1006.0" />
+        <TableView fx:id="donationSummaryTable" layoutX="76.0" layoutY="57.0" prefHeight="424.0" prefWidth="1006.0" styleClass="ta">
+            <columns>
+                <TableColumn fx:id="colDonID" editable="false" maxWidth="300.0" minWidth="169.0" prefWidth="169.0" text="Donation ID" />
+                <TableColumn fx:id="colDonorID" editable="false" maxWidth="300.0" minWidth="-Infinity" prefWidth="204.0" text="Donor ID" />
+                <TableColumn fx:id="colDonorName" editable="false" minWidth="179.0" prefWidth="221.0" text="Donor Name" />
+                <TableColumn fx:id="colDonDate" editable="false" maxWidth="337.0" minWidth="-Infinity" prefWidth="214.0" text="Donation Date" />
+                <TableColumn fx:id="colDonAmount" editable="false" maxWidth="429.0" minWidth="0.0" prefWidth="202.0" text="Donation Amount (Bdt)" />
+            </columns>
+        </TableView>
+      <JFXTextField fx:id="totalDonationTextfield" editable="false" layoutX="904.0" layoutY="497.0" prefHeight="31.0" prefWidth="166.0" style="-fx-background-color: #ffffff;">
+         <effect>
+            <Reflection fraction="0.3" />
+         </effect></JFXTextField>
+      <Label graphicTextGap="22.0" layoutX="753.0" layoutY="502.0" prefHeight="21.0" prefWidth="166.0" text="Total Donation :">
+         <font>
+            <Font name="Californian FB Bold" size="20.0" />
+         </font>
+      </Label>
+    </children>
+</Pane>

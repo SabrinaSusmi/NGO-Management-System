@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.Bloom?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: #ffe4e1;" styleClass="supply-button" stylesheets="@../theme.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="SupplyDetails.SupplyDetailsController">
+      <children>
+         <Pane fx:id="supplyDetailsPane" prefHeight="1275.0" prefWidth="1473.0" style="-fx-background-color: #ffe4e1;" stylesheets="@../theme.css">
+            <children>
+               <AnchorPane layoutX="-1.0" layoutY="-1.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="67.0" prefWidth="1800.0" style="-fx-background-color: #212121;">
+                  <children>
+                     <Label graphicTextGap="22.0" layoutX="62.0" layoutY="22.0" prefHeight="67.0" prefWidth="290.0" text="Supply Details" textFill="WHITE">
+                        <font>
+                           <Font name="Californian FB Bold" size="36.0" />
+                        </font>
+                     </Label>
+                  </children>
+               </AnchorPane>
+               <Label graphicTextGap="22.0" layoutX="386.0" layoutY="144.0" text="     Food Items">
+                  <font>
+                     <Font name="Californian FB" size="30.0" />
+                  </font>
+                  <effect>
+                     <Bloom threshold="0.5" />
+                  </effect>
+               </Label>
+               <Label graphicTextGap="22.0" layoutX="365.0" layoutY="514.0" text="   Health Products">
+                  <font>
+                     <Font name="Californian FB" size="30.0" />
+                  </font>
+                  <effect>
+                     <Bloom threshold="0.5" />
+                  </effect>
+               </Label>
+               <Label graphicTextGap="22.0" layoutX="771.0" layoutY="144.0" text="Emergency Products">
+                  <font>
+                     <Font name="Californian FB" size="30.0" />
+                  </font>
+                  <effect>
+                     <Bloom threshold="0.5" />
+                  </effect>
+               </Label>
+            <Label graphicTextGap="22.0" layoutX="830.0" layoutY="514.0" text="Vaccines">
+               <font>
+                  <Font name="Californian FB" size="30.0" />
+               </font>
+               <effect>
+                  <Bloom threshold="0.5" />
+               </effect>
+            </Label>
+               <ImageView fitHeight="173.0" fitWidth="203.0" layoutX="411.0" layoutY="215.0" onMouseClicked="#handleSupplyFood" pickOnBounds="true" preserveRatio="true">
+                  <image>
+                     <Image url="@../images/ic_food.png" />
+                  </image>
+               </ImageView>
+               <ImageView fitHeight="173.0" fitWidth="186.0" layoutX="798.0" layoutY="215.0" onMouseClicked="#handleSupplyEmergency" pickOnBounds="true" preserveRatio="true">
+                  <image>
+                     <Image url="@../images/ic_emergency.png" />
+                  </image>
+               </ImageView>
+               <ImageView fitHeight="173.0" fitWidth="186.0" layoutX="801.0" layoutY="579.0" onMouseClicked="#handleSupplyVaccine" pickOnBounds="true" preserveRatio="true">
+                  <image>
+                     <Image url="@../images/ic_vaccine.png" />
+                  </image>
+               </ImageView>
+               <ImageView fitHeight="173.0" fitWidth="186.0" layoutX="401.0" layoutY="579.0" onMouseClicked="#handleSupplyMedicine" pickOnBounds="true" preserveRatio="true">
+                  <image>
+                     <Image url="@../images/ic_medicine.png" />
+                  </image>
+               </ImageView>
+            </children>
+         </Pane>
+      </children>
+   </AnchorPane>
